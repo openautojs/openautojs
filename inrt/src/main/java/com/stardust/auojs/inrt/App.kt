@@ -28,8 +28,8 @@ import com.stardust.auojs.inrt.pluginclient.AutoXKeepLiveService
 import com.stardust.autojs.core.ui.inflater.ImageLoader
 import com.stardust.autojs.core.ui.inflater.util.Drawables
 import com.stardust.autojs.execution.ScriptExecuteActivity
-import org.autojs.autoxjs.inrt.BuildConfig
-import org.autojs.autoxjs.inrt.R
+import org.openautojs.autojs.inrt.BuildConfig
+import org.openautojs.autojs.inrt.R
 
 
 /**

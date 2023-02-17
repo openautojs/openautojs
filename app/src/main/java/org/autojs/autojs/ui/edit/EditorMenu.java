@@ -42,7 +42,7 @@ public class EditorMenu {
     public EditorMenu(EditorView editorView) {
         mEditorView = editorView;
         mContext = editorView.getContext();
-        mEditor = editorView.getEditor();
+        mEditor = editorView.editor;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

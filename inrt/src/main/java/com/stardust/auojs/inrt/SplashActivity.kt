@@ -35,7 +35,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.autojs.autoxjs.inrt.R
+import org.openautojs.autojs.inrt.R
 
 /**
  * Created by Stardust on 2018/2/2.

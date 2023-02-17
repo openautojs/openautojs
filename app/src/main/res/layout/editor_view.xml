@@ -98,7 +98,7 @@
 
         </LinearLayout>
 
-        <org.autojs.autojs.ui.widget.EWebView
+        <org.autojs.autojs.ui.widget.SwipeRefreshWebView
             android:id="@+id/docs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

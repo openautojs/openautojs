@@ -1,740 +1,705 @@
-package org.autojs.autojs.ui.edit;
+package org.autojs.autojs.ui.edit
 
-import static org.autojs.autojs.model.script.Scripts.ACTION_ON_EXECUTION_FINISHED;
-import static org.autojs.autojs.model.script.Scripts.EXTRA_EXCEPTION_COLUMN_NUMBER;
-import static org.autojs.autojs.model.script.Scripts.EXTRA_EXCEPTION_LINE_NUMBER;
-import static org.autojs.autojs.model.script.Scripts.EXTRA_EXCEPTION_MESSAGE;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.text.TextUtils;
-import android.util.AttributeSet;
-import android.util.SparseBooleanArray;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.android.material.snackbar.Snackbar;
-import com.stardust.autojs.engine.JavaScriptEngine;
-import com.stardust.autojs.engine.ScriptEngine;
-import com.stardust.autojs.execution.ScriptExecution;
-import com.stardust.pio.PFiles;
-import com.stardust.util.BackPressedHandler;
-import com.stardust.util.Callback;
-import com.stardust.util.ViewUtils;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.ViewById;
-import org.autojs.autojs.Pref;
-import org.openautojs.autojs.R;
-import org.autojs.autojs.autojs.AutoJs;
-import org.autojs.autojs.model.autocomplete.AutoCompletion;
-import org.autojs.autojs.model.autocomplete.CodeCompletion;
-import org.autojs.autojs.model.autocomplete.CodeCompletions;
-import org.autojs.autojs.model.autocomplete.Symbols;
-import org.autojs.autojs.model.indices.Module;
-import org.autojs.autojs.model.indices.Property;
-import org.autojs.autojs.model.script.Scripts;
-import org.autojs.autojs.tool.Observers;
-import org.autojs.autojs.ui.doc.ManualDialog;
-import org.autojs.autojs.ui.edit.completion.CodeCompletionBar;
-import org.autojs.autojs.ui.edit.debug.DebugBar;
-import org.autojs.autojs.ui.edit.editor.CodeEditor;
-import org.autojs.autojs.ui.edit.keyboard.FunctionsKeyboardHelper;
-import org.autojs.autojs.ui.edit.keyboard.FunctionsKeyboardView;
-import org.autojs.autojs.ui.edit.theme.Theme;
-import org.autojs.autojs.ui.edit.theme.Themes;
-import org.autojs.autojs.ui.edit.toolbar.DebugToolbarFragment;
-import org.autojs.autojs.ui.edit.toolbar.DebugToolbarFragment_;
-import org.autojs.autojs.ui.edit.toolbar.NormalToolbarFragment;
-import org.autojs.autojs.ui.edit.toolbar.NormalToolbarFragment_;
-import org.autojs.autojs.ui.edit.toolbar.SearchToolbarFragment;
-import org.autojs.autojs.ui.edit.toolbar.SearchToolbarFragment_;
-import org.autojs.autojs.ui.edit.toolbar.ToolbarFragment;
-import org.autojs.autojs.ui.log.LogActivityKt;
-import org.autojs.autojs.ui.widget.EWebView;
-import org.autojs.autojs.ui.widget.SimpleTextWatcher;
-
-import java.io.File;
-import java.util.List;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.*
+import android.net.Uri
+import android.os.Bundle
+import android.os.Parcelable
+import android.text.Editable
+import android.text.TextUtils
+import android.util.AttributeSet
+import android.util.SparseBooleanArray
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentActivity
+import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.snackbar.Snackbar
+import com.stardust.autojs.engine.JavaScriptEngine
+import com.stardust.autojs.engine.ScriptEngine
+import com.stardust.autojs.execution.ScriptExecution
+import com.stardust.pio.PFiles.getNameWithoutExtension
+import com.stardust.pio.PFiles.move
+import com.stardust.pio.PFiles.read
+import com.stardust.pio.PFiles.write
+import com.stardust.util.BackPressedHandler.HostActivity
+import com.stardust.util.Callback
+import com.stardust.util.ViewUtils
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
+import org.androidannotations.annotations.AfterViews
+import org.androidannotations.annotations.EViewGroup
+import org.androidannotations.annotations.ViewById
+import org.autojs.autojs.Pref
+import org.autojs.autojs.autojs.AutoJs
+import org.autojs.autojs.model.autocomplete.AutoCompletion
+import org.autojs.autojs.model.autocomplete.CodeCompletions
+import org.autojs.autojs.model.autocomplete.Symbols
+import org.autojs.autojs.model.indices.Module
+import org.autojs.autojs.model.indices.Property
+import org.autojs.autojs.model.script.Scripts.ACTION_ON_EXECUTION_FINISHED
+import org.autojs.autojs.model.script.Scripts.EXTRA_EXCEPTION_COLUMN_NUMBER
+import org.autojs.autojs.model.script.Scripts.EXTRA_EXCEPTION_LINE_NUMBER
+import org.autojs.autojs.model.script.Scripts.EXTRA_EXCEPTION_MESSAGE
+import org.autojs.autojs.model.script.Scripts.openByOtherApps
+import org.autojs.autojs.model.script.Scripts.runWithBroadcastSender
+import org.autojs.autojs.tool.Observers
+import org.autojs.autojs.ui.doc.ManualDialog
+import org.autojs.autojs.ui.edit.completion.CodeCompletionBar
+import org.autojs.autojs.ui.edit.completion.CodeCompletionBar.OnHintClickListener
+import org.autojs.autojs.ui.edit.debug.DebugBar
+import org.autojs.autojs.ui.edit.editor.CodeEditor
+import org.autojs.autojs.ui.edit.keyboard.FunctionsKeyboardHelper
+import org.autojs.autojs.ui.edit.keyboard.FunctionsKeyboardView
+import org.autojs.autojs.ui.edit.keyboard.FunctionsKeyboardView.ClickCallback
+import org.autojs.autojs.ui.edit.theme.Theme
+import org.autojs.autojs.ui.edit.theme.Themes.getAllThemes
+import org.autojs.autojs.ui.edit.theme.Themes.getCurrent
+import org.autojs.autojs.ui.edit.theme.Themes.setCurrent
+import org.autojs.autojs.ui.edit.toolbar.*
+import org.autojs.autojs.ui.log.LogActivityKt.Companion.start
+import org.autojs.autojs.ui.widget.EWebView
+import org.autojs.autojs.ui.widget.SimpleTextWatcher
+import org.autojs.autojs.ui.widget.SwipeRefreshWebView
+import org.openautojs.autojs.R
+import java.io.File
 
 /**
  * Created by Stardust on 2017/9/28.
  */
 @SuppressLint("NonConstantResourceId")
 @EViewGroup(R.layout.editor_view)
-public class EditorView extends FrameLayout implements CodeCompletionBar.OnHintClickListener, FunctionsKeyboardView.ClickCallback, ToolbarFragment.OnMenuItemClickListener {
-
-    public static final String EXTRA_PATH = "path";
-    public static final String EXTRA_NAME = "name";
-    public static final String EXTRA_CONTENT = "content";
-    public static final String EXTRA_READ_ONLY = "readOnly";
-    public static final String EXTRA_SAVE_ENABLED = "saveEnabled";
-    public static final String EXTRA_RUN_ENABLED = "runEnabled";
-
+open class EditorView : FrameLayout, OnHintClickListener, ClickCallback,
+    ToolbarFragment.OnMenuItemClickListener {
     @ViewById(R.id.editor)
-    CodeEditor mEditor;
+    @JvmField
+    var editor: CodeEditor? = null
 
+    @JvmField
     @ViewById(R.id.code_completion_bar)
-    CodeCompletionBar mCodeCompletionBar;
+    var mCodeCompletionBar: CodeCompletionBar? = null
 
+    @JvmField
     @ViewById(R.id.input_method_enhance_bar)
-    View mInputMethodEnhanceBar;
+    var mInputMethodEnhanceBar: View? = null
 
+    @JvmField
     @ViewById(R.id.symbol_bar)
-    CodeCompletionBar mSymbolBar;
+    var mSymbolBar: CodeCompletionBar? = null
 
+    @JvmField
     @ViewById(R.id.functions)
-    ImageView mShowFunctionsButton;
+    var mShowFunctionsButton: ImageView? = null
 
+    @JvmField
     @ViewById(R.id.functions_keyboard)
-    FunctionsKeyboardView mFunctionsKeyboard;
+    var mFunctionsKeyboard: FunctionsKeyboardView? = null
 
     @ViewById(R.id.debug_bar)
-    DebugBar mDebugBar;
+    @JvmField
+    var debugBar: DebugBar? = null
 
+    @JvmField
     @ViewById(R.id.docs)
-    EWebView mDocsWebView;
+    var mDocsWebView: SwipeRefreshWebView? = null
 
+    @JvmField
     @ViewById(R.id.drawer_layout)
-    DrawerLayout mDrawerLayout;
+    var mDrawerLayout: DrawerLayout? = null
 
-    private String mName;
-    private Uri mUri;
-    private boolean mReadOnly = false;
-    private int mScriptExecutionId;
-    private AutoCompletion mAutoCompletion;
-    private Theme mEditorTheme;
-    private FunctionsKeyboardHelper mFunctionsKeyboardHelper;
-    private BroadcastReceiver mOnRunFinishedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (ACTION_ON_EXECUTION_FINISHED.equals(intent.getAction())) {
-                mScriptExecutionId = ScriptExecution.NO_ID;
+    var name: String? = null
+        private set
+    var uri: Uri? = null
+        private set
+    private var mReadOnly = false
+    var scriptExecutionId = 0
+        private set
+    private var mAutoCompletion: AutoCompletion? = null
+    private var mEditorTheme: Theme? = null
+    private var mFunctionsKeyboardHelper: FunctionsKeyboardHelper? = null
+    private val mOnRunFinishedReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (ACTION_ON_EXECUTION_FINISHED == intent.action) {
+                scriptExecutionId = ScriptExecution.NO_ID
                 if (mDebugging) {
-                    exitDebugging();
+                    exitDebugging()
                 }
-                setMenuItemStatus(R.id.run, true);
-                String msg = intent.getStringExtra(EXTRA_EXCEPTION_MESSAGE);
-                int line = intent.getIntExtra(EXTRA_EXCEPTION_LINE_NUMBER, -1);
-                int col = intent.getIntExtra(EXTRA_EXCEPTION_COLUMN_NUMBER, 0);
+                setMenuItemStatus(R.id.run, true)
+                val msg = intent.getStringExtra(EXTRA_EXCEPTION_MESSAGE)
+                val line = intent.getIntExtra(EXTRA_EXCEPTION_LINE_NUMBER, -1)
+                val col = intent.getIntExtra(EXTRA_EXCEPTION_COLUMN_NUMBER, 0)
                 if (line >= 1) {
-                    mEditor.jumpTo(line - 1, col);
+                    editor!!.jumpTo(line - 1, col)
                 }
-                if (msg != null) {
-                    showErrorMessage(msg);
-                }
+                msg?.let { showErrorMessage(it) }
             }
         }
-    };
+    }
+    private val mMenuItemStatus = SparseBooleanArray()
+    private var mRestoredText: String? = null
+    private val mNormalToolbar: NormalToolbarFragment = NormalToolbarFragment_()
+    private var mDebugging = false
 
-    private SparseBooleanArray mMenuItemStatus = new SparseBooleanArray();
-    private String mRestoredText;
-    private NormalToolbarFragment mNormalToolbar = new NormalToolbarFragment_();
-    private boolean mDebugging = false;
-
-    public EditorView(Context context) {
-        super(context);
+    constructor(context: Context?) : super(context!!) {}
+    constructor(context: Context?, attrs: AttributeSet?) : super(
+        context!!, attrs
+    ) {
     }
 
-    public EditorView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context!!, attrs, defStyleAttr
+    ) {
     }
 
-    public EditorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        getContext().registerReceiver(mOnRunFinishedReceiver, new IntentFilter(ACTION_ON_EXECUTION_FINISHED));
-        if (getContext() instanceof BackPressedHandler.HostActivity) {
-            ((BackPressedHandler.HostActivity) getContext()).getBackPressedObserver().registerHandler(mFunctionsKeyboardHelper);
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        context.registerReceiver(mOnRunFinishedReceiver, IntentFilter(ACTION_ON_EXECUTION_FINISHED))
+        if (context is HostActivity) {
+            (context as HostActivity).backPressedObserver.registerHandler(mFunctionsKeyboardHelper)
         }
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        getContext().unregisterReceiver(mOnRunFinishedReceiver);
-        if (getContext() instanceof BackPressedHandler.HostActivity) {
-            ((BackPressedHandler.HostActivity) getContext()).getBackPressedObserver().unregisterHandler(mFunctionsKeyboardHelper);
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        context.unregisterReceiver(mOnRunFinishedReceiver)
+        if (context is HostActivity) {
+            (context as HostActivity).backPressedObserver.unregisterHandler(mFunctionsKeyboardHelper)
         }
     }
 
-    public Uri getUri() {
-        return mUri;
-    }
-
-    public Observable<String> handleIntent(Intent intent) {
-        mName = intent.getStringExtra(EXTRA_NAME);
+    fun handleIntent(intent: Intent): Observable<String> {
+        name = intent.getStringExtra(EXTRA_NAME)
         return handleText(intent)
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(str -> {
-                    mReadOnly = intent.getBooleanExtra(EXTRA_READ_ONLY, false);
-                    boolean saveEnabled = intent.getBooleanExtra(EXTRA_SAVE_ENABLED, true);
-                    if (mReadOnly || !saveEnabled) {
-                        findViewById(R.id.save).setVisibility(View.GONE);
-                    }
-                    if (!intent.getBooleanExtra(EXTRA_RUN_ENABLED, true)) {
-                        findViewById(R.id.run).setVisibility(GONE);
-                    }
-                    if (mReadOnly) {
-                        mEditor.setReadOnly(true);
-                    }
-                });
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext { str: String? ->
+                mReadOnly = intent.getBooleanExtra(EXTRA_READ_ONLY, false)
+                val saveEnabled = intent.getBooleanExtra(EXTRA_SAVE_ENABLED, true)
+                if (mReadOnly || !saveEnabled) {
+                    findViewById<View>(R.id.save).visibility = GONE
+                }
+                if (!intent.getBooleanExtra(EXTRA_RUN_ENABLED, true)) {
+                    findViewById<View>(R.id.run).visibility = GONE
+                }
+                if (mReadOnly) {
+                    editor!!.setReadOnly(true)
+                }
+            }
     }
 
-    public void setRestoredText(String text) {
-        mRestoredText = text;
-        mEditor.setText(text);
+    fun setRestoredText(text: String?) {
+        mRestoredText = text
+        editor!!.text = text
     }
 
-    private Observable<String> handleText(Intent intent) {
-        String path = intent.getStringExtra(EXTRA_PATH);
-        String content = intent.getStringExtra(EXTRA_CONTENT);
-        if (content != null) {
-            setInitialText(content);
-            return Observable.just(content);
+    private fun handleText(intent: Intent): Observable<String> {
+        val path = intent.getStringExtra(EXTRA_PATH)
+        val content = intent.getStringExtra(EXTRA_CONTENT)
+        return if (content != null) {
+            setInitialText(content)
+            Observable.just(content)
         } else {
             if (path == null) {
-                if (intent.getData() == null) {
-                    return Observable.error(new IllegalArgumentException("path and content is empty"));
+                if (intent.data == null) {
+                    return Observable.error(
+                        IllegalArgumentException(
+                            "path and content is empty"
+                        )
+                    )
                 } else {
-                    mUri = intent.getData();
+                    uri = intent.data
                 }
             } else {
-                mUri = Uri.fromFile(new File(path));
+                uri = Uri.fromFile(File(path))
             }
-            if (mName == null) {
-                mName = PFiles.getNameWithoutExtension(mUri.getPath());
+            if (name == null) {
+                name = getNameWithoutExtension(uri!!.path!!)
             }
-            return loadUri(mUri);
+            loadUri(uri)
         }
     }
 
-
     @SuppressLint("CheckResult")
-    private Observable<String> loadUri(final Uri uri) {
-        mEditor.setProgress(true);
-        return Observable.fromCallable(() -> PFiles.read(getContext().getContentResolver().openInputStream(uri)))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(s -> {
-                    setInitialText(s);
-                    mEditor.setProgress(false);
-                });
+    private fun loadUri(uri: Uri?): Observable<String> {
+        editor!!.setProgress(true)
+        return Observable.fromCallable {
+            read(
+                context.contentResolver.openInputStream(uri!!)!!
+            )
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext { s: String ->
+                setInitialText(s)
+                editor!!.setProgress(false)
+            }
     }
 
-    private void setInitialText(String text) {
+    private fun setInitialText(text: String) {
         if (mRestoredText != null) {
-            mEditor.setText(mRestoredText);
-            mRestoredText = null;
-            return;
+            editor!!.text = mRestoredText
+            mRestoredText = null
+            return
         }
-        mEditor.setInitialText(text);
+        editor!!.setInitialText(text)
     }
 
-
-    private void setMenuItemStatus(int id, boolean enabled) {
-        mMenuItemStatus.put(id, enabled);
-        ToolbarFragment fragment = (ToolbarFragment) getActivity().getSupportFragmentManager()
-                .findFragmentById(R.id.toolbar_menu);
+    private fun setMenuItemStatus(id: Int, enabled: Boolean) {
+        mMenuItemStatus.put(id, enabled)
+        val fragment = activity.supportFragmentManager
+            .findFragmentById(R.id.toolbar_menu) as ToolbarFragment?
         if (fragment == null) {
-            mNormalToolbar.setMenuItemStatus(id, enabled);
+            mNormalToolbar.setMenuItemStatus(id, enabled)
         } else {
-            fragment.setMenuItemStatus(id, enabled);
+            fragment.setMenuItemStatus(id, enabled)
         }
     }
 
-    public boolean getMenuItemStatus(int id, boolean defValue) {
-        return mMenuItemStatus.get(id, defValue);
+    fun getMenuItemStatus(id: Int, defValue: Boolean): Boolean {
+        return mMenuItemStatus[id, defValue]
     }
 
+    @SuppressLint("CheckResult")
     @AfterViews
-    void init() {
+    fun init() {
         //setTheme(Theme.getDefault(getContext()));
-        setUpEditor();
-        setUpInputMethodEnhancedBar();
-        setUpFunctionsKeyboard();
-        setMenuItemStatus(R.id.save, false);
-        if (mDocsWebView.getIsTbs()) {
-            mDocsWebView.getWebViewTbs().getSettings().setDisplayZoomControls(true);
-            mDocsWebView.getWebViewTbs().loadUrl(Pref.getDocumentationUrl() + "index.html");
-        } else {
-            mDocsWebView.getWebView().getSettings().setDisplayZoomControls(true);
-            mDocsWebView.getWebView().loadUrl(Pref.getDocumentationUrl() + "index.html");
-        }
-        Themes.getCurrent(getContext())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::setTheme);
-        initNormalToolbar();
+        setUpEditor()
+        setUpInputMethodEnhancedBar()
+        setUpFunctionsKeyboard()
+        setMenuItemStatus(R.id.save, false)
+
+        mDocsWebView!!.webView.settings.displayZoomControls = true
+        mDocsWebView!!.webView.loadUrl(Pref.getDocumentationUrl())
+
+        getCurrent(context)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(Consumer { theme: Theme? -> setTheme(theme) })
+        initNormalToolbar()
     }
 
-    private void initNormalToolbar() {
-        mNormalToolbar.setOnMenuItemClickListener(this);
-        mNormalToolbar.setOnMenuItemLongClickListener(id -> {
+    private fun initNormalToolbar() {
+        mNormalToolbar.setOnMenuItemClickListener(this)
+        mNormalToolbar.setOnMenuItemLongClickListener { id: Int ->
             if (id == R.id.run) {
-                debug();
-                return true;
+                debug()
+                return@setOnMenuItemLongClickListener true
             }
-            return false;
-        });
-        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.toolbar_menu);
+            false
+        }
+        val fragment = activity.supportFragmentManager.findFragmentById(R.id.toolbar_menu)
         if (fragment == null) {
-            showNormalToolbar();
+            showNormalToolbar()
         }
     }
 
-    private void setUpFunctionsKeyboard() {
-        mFunctionsKeyboardHelper = FunctionsKeyboardHelper.with((Activity) getContext())
-                .setContent(mEditor)
-                .setFunctionsTrigger(mShowFunctionsButton)
-                .setFunctionsView(mFunctionsKeyboard)
-                .setEditView(mEditor.getCodeEditText())
-                .build();
-        mFunctionsKeyboard.setClickCallback(this);
+    private fun setUpFunctionsKeyboard() {
+        mFunctionsKeyboardHelper = FunctionsKeyboardHelper.with(context as Activity)
+            .setContent(editor)
+            .setFunctionsTrigger(mShowFunctionsButton)
+            .setFunctionsView(mFunctionsKeyboard)
+            .setEditView(editor!!.codeEditText)
+            .build()
+        mFunctionsKeyboard!!.setClickCallback(this)
     }
 
-    private void setUpInputMethodEnhancedBar() {
-        mSymbolBar.setCodeCompletions(Symbols.getSymbols());
-        mCodeCompletionBar.setOnHintClickListener(this);
-        mSymbolBar.setOnHintClickListener(this);
-        mAutoCompletion = new AutoCompletion(getContext(), mEditor.getCodeEditText());
-        mAutoCompletion.setAutoCompleteCallback(mCodeCompletionBar::setCodeCompletions);
+    private fun setUpInputMethodEnhancedBar() {
+        mSymbolBar!!.codeCompletions = Symbols.getSymbols()
+        mCodeCompletionBar!!.setOnHintClickListener(this)
+        mSymbolBar!!.setOnHintClickListener(this)
+        mAutoCompletion = AutoCompletion(context, editor!!.codeEditText)
+        mAutoCompletion!!.setAutoCompleteCallback { codeCompletions: CodeCompletions? ->
+            mCodeCompletionBar!!.codeCompletions = codeCompletions
+        }
     }
 
-
-    private void setUpEditor() {
-        mEditor.getCodeEditText().addTextChangedListener(new SimpleTextWatcher(s -> {
-            setMenuItemStatus(R.id.save, mEditor.isTextChanged());
-            setMenuItemStatus(R.id.undo, mEditor.canUndo());
-            setMenuItemStatus(R.id.redo, mEditor.canRedo());
-        }));
-        mEditor.addCursorChangeCallback(this::autoComplete);
-        mEditor.getCodeEditText().setTextSize(Pref.getEditorTextSize((int) ViewUtils.pxToSp(getContext(), mEditor.getCodeEditText().getTextSize())));
+    private fun setUpEditor() {
+        editor!!.codeEditText.addTextChangedListener(SimpleTextWatcher { s: Editable? ->
+            setMenuItemStatus(R.id.save, editor!!.isTextChanged)
+            setMenuItemStatus(R.id.undo, editor!!.canUndo())
+            setMenuItemStatus(R.id.redo, editor!!.canRedo())
+        })
+        editor!!.addCursorChangeCallback { line: String, cursor: Int -> autoComplete(line, cursor) }
+        editor!!.codeEditText.textSize = Pref.getEditorTextSize(
+            ViewUtils.pxToSp(
+                context, editor!!.codeEditText.textSize
+            ).toInt()
+        ).toFloat()
     }
 
-    private void autoComplete(String line, int cursor) {
-        mAutoCompletion.onCursorChange(line, cursor);
+    private fun autoComplete(line: String, cursor: Int) {
+        mAutoCompletion!!.onCursorChange(line, cursor)
     }
 
-    public DebugBar getDebugBar() {
-        return mDebugBar;
+    fun setTheme(theme: Theme?) {
+        mEditorTheme = theme
+        editor!!.setTheme(theme)
+        mInputMethodEnhanceBar!!.setBackgroundColor(theme!!.imeBarBackgroundColor)
+        val textColor = theme.imeBarForegroundColor
+        mCodeCompletionBar!!.setTextColor(textColor)
+        mSymbolBar!!.setTextColor(textColor)
+        mShowFunctionsButton!!.setColorFilter(textColor)
+        invalidate()
     }
 
-    public void setTheme(Theme theme) {
-        mEditorTheme = theme;
-        mEditor.setTheme(theme);
-        mInputMethodEnhanceBar.setBackgroundColor(theme.getImeBarBackgroundColor());
-        int textColor = theme.getImeBarForegroundColor();
-        mCodeCompletionBar.setTextColor(textColor);
-        mSymbolBar.setTextColor(textColor);
-        mShowFunctionsButton.setColorFilter(textColor);
-        invalidate();
-    }
+    fun onBackPressed(): Boolean {
+        if (mDrawerLayout!!.isDrawerOpen(GravityCompat.START)) {
 
-    public boolean onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            if (mDocsWebView.getIsTbs()) {
-                if (mDocsWebView.getWebViewTbs().canGoBack()) {
-                    mDocsWebView.getWebViewTbs().goBack();
-                } else {
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
-                }
+            if (mDocsWebView!!.webView.canGoBack()) {
+                mDocsWebView!!.webView.goBack()
             } else {
-                if (mDocsWebView.getWebView().canGoBack()) {
-                    mDocsWebView.getWebView().goBack();
-                } else {
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
-                }
+                mDrawerLayout!!.closeDrawer(GravityCompat.START)
             }
-            return true;
+
+            return true
         }
-        return false;
+        return false
     }
 
-    @Override
-    public void onToolbarMenuItemClick(int id) {
-        switch (id) {
-            case R.id.run:
-                runAndSaveFileIfNeeded();
-                break;
-            case R.id.save:
-                saveFile();
-                break;
-            case R.id.undo:
-                undo();
-                break;
-            case R.id.redo:
-                redo();
-                break;
-            case R.id.replace:
-                replace();
-                break;
-            case R.id.find_next:
-                findNext();
-                break;
-            case R.id.find_prev:
-                findPrev();
-                break;
-            case R.id.cancel_search:
-                cancelSearch();
-                break;
-            case R.id.textSizePlus:
-                setTextSizePlus();
-                break;
-            case R.id.textSizeMinus:
-                setTextSizeMinus();
-                break;
+    override fun onToolbarMenuItemClick(id: Int) {
+        when (id) {
+            R.id.run -> runAndSaveFileIfNeeded()
+            R.id.save -> saveFile()
+            R.id.undo -> undo()
+            R.id.redo -> redo()
+            R.id.replace -> replace()
+            R.id.find_next -> findNext()
+            R.id.find_prev -> findPrev()
+            R.id.cancel_search -> cancelSearch()
+            R.id.textSizePlus -> setTextSizePlus()
+            R.id.textSizeMinus -> setTextSizeMinus()
         }
     }
 
     @SuppressLint("CheckResult")
-    public void runAndSaveFileIfNeeded() {
+    fun runAndSaveFileIfNeeded() {
         save().observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> run(true), Observers.toastMessage());
+            .subscribe({ s: String? -> run(true) }, Observers.toastMessage())
     }
 
-    public ScriptExecution run(boolean showMessage) {
+    fun run(showMessage: Boolean): ScriptExecution? {
         if (showMessage) {
-            Snackbar.make(this, R.string.text_start_running, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(this, R.string.text_start_running, Snackbar.LENGTH_SHORT).show()
         }
         // TODO: 2018/10/24
-        ScriptExecution execution = Scripts.INSTANCE.runWithBroadcastSender(new File(mUri.getPath()));
-        if (execution == null) {
-            return null;
-        }
-        mScriptExecutionId = execution.getId();
-        setMenuItemStatus(R.id.run, false);
-        return execution;
+        val execution = runWithBroadcastSender(File(uri!!.path))
+            ?: return null
+        scriptExecutionId = execution.id
+        setMenuItemStatus(R.id.run, false)
+        return execution
     }
 
-
-    public void undo() {
-        mEditor.undo();
+    fun undo() {
+        editor!!.undo()
     }
 
-    public void redo() {
-        mEditor.redo();
+    fun redo() {
+        editor!!.redo()
     }
 
-    public Observable<String> save() {
-        String path = mUri.getPath();
-        String backPath = path + ".b_a_k";
-        PFiles.move(path, backPath);
-        return Observable.just(mEditor.getText())
-                .observeOn(Schedulers.io())
-                .doOnNext(s -> PFiles.write(getContext().getContentResolver().openOutputStream(mUri), s))
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(s -> {
-                    mEditor.markTextAsSaved();
-                    setMenuItemStatus(R.id.save, false);
-                })
-                .doOnNext(s -> new File(backPath).delete());
+    fun save(): Observable<String> {
+        val path = uri!!.path
+        val backPath = "$path.b_a_k"
+        move(path!!, backPath)
+        return Observable.just(editor!!.text)
+            .observeOn(Schedulers.io())
+            .doOnNext { s: String? ->
+                write(
+                    context.contentResolver.openOutputStream(
+                        uri!!
+                    )!!, s!!
+                )
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext { s: String? ->
+                editor!!.markTextAsSaved()
+                setMenuItemStatus(R.id.save, false)
+            }
+            .doOnNext { s: String? -> File(backPath).delete() }
     }
 
-    public void forceStop() {
-        doWithCurrentEngine(ScriptEngine::forceStop);
+    fun forceStop() {
+        doWithCurrentEngine { obj: ScriptEngine<*> -> obj.forceStop() }
     }
 
-    private void doWithCurrentEngine(Callback<ScriptEngine> callback) {
-        ScriptExecution execution = AutoJs.getInstance().getScriptEngineService().getScriptExecution(mScriptExecutionId);
+    private fun doWithCurrentEngine(callback: Callback<ScriptEngine<*>>) {
+        val execution = AutoJs.getInstance().scriptEngineService.getScriptExecution(
+            scriptExecutionId
+        )
         if (execution != null) {
-            ScriptEngine engine = execution.getEngine();
+            val engine = execution.engine
             if (engine != null) {
-                callback.call(engine);
+                callback.call(engine)
             }
         }
     }
 
     @SuppressLint("CheckResult")
-    public void saveFile() {
+    fun saveFile() {
         save()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Observers.emptyConsumer(), e -> {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(Observers.emptyConsumer()) { e: Throwable ->
+                e.printStackTrace()
+                Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+            }
     }
 
-    void findNext() {
-        mEditor.findNext();
+    fun findNext() {
+        editor!!.findNext()
     }
 
-    void findPrev() {
-        mEditor.findPrev();
+    fun findPrev() {
+        editor!!.findPrev()
     }
 
-    void cancelSearch() {
-        showNormalToolbar();
+    fun cancelSearch() {
+        showNormalToolbar()
     }
 
-    private void showNormalToolbar() {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.toolbar_menu, mNormalToolbar)
-                .commitAllowingStateLoss();
+    private fun showNormalToolbar() {
+        activity.supportFragmentManager.beginTransaction()
+            .replace(R.id.toolbar_menu, mNormalToolbar)
+            .commitAllowingStateLoss()
     }
 
-    FragmentActivity getActivity() {
-        Context context = getContext();
-        while (!(context instanceof Activity) && context instanceof ContextWrapper) {
-            context = ((ContextWrapper) context).getBaseContext();
+    val activity: FragmentActivity
+        get() {
+            var context = context
+            while (context !is Activity && context is ContextWrapper) {
+                context = context.baseContext
+            }
+            return context as FragmentActivity
         }
-        return (FragmentActivity) context;
+
+    fun replace() {
+        editor!!.replaceSelection()
     }
 
-    void replace() {
-        mEditor.replaceSelection();
+    val isTextChanged: Boolean
+        get() = editor!!.isTextChanged
+
+    fun showConsole() {
+        doWithCurrentEngine { engine: ScriptEngine<*> -> (engine as JavaScriptEngine).runtime.console.show() }
     }
 
-    public String getName() {
-        return mName;
-    }
-
-    public boolean isTextChanged() {
-        return mEditor.isTextChanged();
-    }
-
-    public void showConsole() {
-        doWithCurrentEngine(engine -> ((JavaScriptEngine) engine).getRuntime().console.show());
-    }
-
-    public void openByOtherApps() {
-        if (mUri != null) {
-            Scripts.INSTANCE.openByOtherApps(mUri);
+    fun openByOtherApps() {
+        if (uri != null) {
+            openByOtherApps(uri!!)
         }
     }
 
-    public void beautifyCode() {
-        mEditor.beautifyCode();
+    fun beautifyCode() {
+        editor!!.beautifyCode()
     }
 
-    public void selectEditorTheme() {
-        mEditor.setProgress(true);
-        Themes.getAllThemes(getContext())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(themes -> {
-                    mEditor.setProgress(false);
-                    selectEditorTheme(themes);
-                });
+    @SuppressLint("CheckResult")
+    fun selectEditorTheme() {
+        editor!!.setProgress(true)
+        getAllThemes(context)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                editor!!.setProgress(false)
+                it?.let { it1 -> selectEditorTheme(it1) }
+            }
     }
 
-    public void selectTextSize() {
-        new TextSizeSettingDialogBuilder(getContext())
-                .initialValue((int) ViewUtils.pxToSp(getContext(), mEditor.getCodeEditText().getTextSize()))
-                .callback(this::setTextSize)
-                .show();
+    fun selectTextSize() {
+        TextSizeSettingDialogBuilder(context)
+            .initialValue(ViewUtils.pxToSp(context, editor!!.codeEditText.textSize).toInt())
+            .callback { value: Int -> setTextSize(value) }
+            .show()
     }
 
-    public void setTextSize(int value) {
-        Pref.setEditorTextSize(value);
-        mEditor.getCodeEditText().setTextSize(value);
+    fun setTextSize(value: Int) {
+        Pref.setEditorTextSize(value)
+        editor!!.codeEditText.textSize = value.toFloat()
     }
 
-    public void setTextSizePlus() {
-        int value = (int) ViewUtils.pxToSp(getContext(), mEditor.getCodeEditText().getTextSize());
-        Pref.setEditorTextSize(Math.min(value + 2, 60));
-        mEditor.getCodeEditText().setTextSize(Math.min(value + 2, 60));
+    fun setTextSizePlus() {
+        val value = ViewUtils.pxToSp(context, editor!!.codeEditText.textSize).toInt()
+        Pref.setEditorTextSize(Math.min(value + 2, 60))
+        editor!!.codeEditText.textSize = Math.min(value + 2, 60).toFloat()
     }
 
-    public void setTextSizeMinus() {
-        int value = (int) ViewUtils.pxToSp(getContext(), mEditor.getCodeEditText().getTextSize());
-        Pref.setEditorTextSize(Math.max(value - 2, 2));
-        mEditor.getCodeEditText().setTextSize(Math.max(value - 2, 2));
+    fun setTextSizeMinus() {
+        val value = ViewUtils.pxToSp(context, editor!!.codeEditText.textSize).toInt()
+        Pref.setEditorTextSize(Math.max(value - 2, 2))
+        editor!!.codeEditText.textSize = Math.max(value - 2, 2).toFloat()
     }
 
-    private void selectEditorTheme(List<Theme> themes) {
-        int i = themes.indexOf(mEditorTheme);
+    private fun selectEditorTheme(themes: List<Theme?>) {
+        var i = themes.indexOf(mEditorTheme)
         if (i < 0) {
-            i = 0;
+            i = 0
         }
-        new MaterialDialog.Builder(getContext())
-                .title(R.string.text_editor_theme)
-                .items(themes)
-                .itemsCallbackSingleChoice(i, (dialog, itemView, which, text) -> {
-                    setTheme(themes.get(which));
-                    Themes.setCurrent(themes.get(which).getName());
-                    return true;
-                })
-                .show();
+        MaterialDialog.Builder(context)
+            .title(R.string.text_editor_theme)
+            .items(themes)
+            .itemsCallbackSingleChoice(i) { dialog: MaterialDialog?, itemView: View?, which: Int, text: CharSequence? ->
+                setTheme(
+                    themes[which]
+                )
+                setCurrent(themes[which]!!.name)
+                true
+            }
+            .show()
     }
 
-    public CodeEditor getEditor() {
-        return mEditor;
+    @Throws(CodeEditor.CheckedPatternSyntaxException::class)
+    fun find(keywords: String?, usingRegex: Boolean) {
+        editor!!.find(keywords, usingRegex)
+        showSearchToolbar(false)
     }
 
-    public void find(String keywords, boolean usingRegex) throws CodeEditor.CheckedPatternSyntaxException {
-        mEditor.find(keywords, usingRegex);
-        showSearchToolbar(false);
+    private fun showSearchToolbar(showReplaceItem: Boolean) {
+        val searchToolbarFragment = SearchToolbarFragment_.builder()
+            .arg(SearchToolbarFragment.ARGUMENT_SHOW_REPLACE_ITEM, showReplaceItem)
+            .build()
+        searchToolbarFragment.setOnMenuItemClickListener(this)
+        activity.supportFragmentManager.beginTransaction()
+            .replace(R.id.toolbar_menu, searchToolbarFragment)
+            .commit()
     }
 
-    private void showSearchToolbar(boolean showReplaceItem) {
-        SearchToolbarFragment searchToolbarFragment = SearchToolbarFragment_.builder()
-                .arg(SearchToolbarFragment.ARGUMENT_SHOW_REPLACE_ITEM, showReplaceItem)
-                .build();
-        searchToolbarFragment.setOnMenuItemClickListener(this);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.toolbar_menu, searchToolbarFragment)
-                .commit();
+    @Throws(CodeEditor.CheckedPatternSyntaxException::class)
+    fun replace(keywords: String?, replacement: String?, usingRegex: Boolean) {
+        editor!!.replace(keywords, replacement, usingRegex)
+        showSearchToolbar(true)
     }
 
-    public void replace(String keywords, String replacement, boolean usingRegex) throws CodeEditor.CheckedPatternSyntaxException {
-        mEditor.replace(keywords, replacement, usingRegex);
-        showSearchToolbar(true);
+    @Throws(CodeEditor.CheckedPatternSyntaxException::class)
+    fun replaceAll(keywords: String?, replacement: String?, usingRegex: Boolean) {
+        editor!!.replaceAll(keywords, replacement, usingRegex)
     }
 
-    public void replaceAll(String keywords, String replacement, boolean usingRegex) throws CodeEditor.CheckedPatternSyntaxException {
-        mEditor.replaceAll(keywords, replacement, usingRegex);
+    fun debug() {
+        val debugToolbarFragment = DebugToolbarFragment_.builder()
+            .build()
+        activity.supportFragmentManager.beginTransaction()
+            .replace(R.id.toolbar_menu, debugToolbarFragment)
+            .commit()
+        debugBar!!.visibility = VISIBLE
+        mInputMethodEnhanceBar!!.visibility = GONE
+        mDebugging = true
     }
 
-
-    public void debug() {
-        DebugToolbarFragment debugToolbarFragment = DebugToolbarFragment_.builder()
-                .build();
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.toolbar_menu, debugToolbarFragment)
-                .commit();
-        mDebugBar.setVisibility(VISIBLE);
-        mInputMethodEnhanceBar.setVisibility(GONE);
-        mDebugging = true;
-    }
-
-    public void exitDebugging() {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.toolbar_menu);
-        if (fragment instanceof DebugToolbarFragment) {
-            ((DebugToolbarFragment) fragment).detachDebugger();
+    fun exitDebugging() {
+        val fragmentManager = activity.supportFragmentManager
+        val fragment = fragmentManager.findFragmentById(R.id.toolbar_menu)
+        if (fragment is DebugToolbarFragment) {
+            fragment.detachDebugger()
         }
-        showNormalToolbar();
-        mEditor.setDebuggingLine(-1);
-        mDebugBar.setVisibility(GONE);
-        mInputMethodEnhanceBar.setVisibility(VISIBLE);
-        mDebugging = false;
+        showNormalToolbar()
+        editor!!.setDebuggingLine(-1)
+        debugBar!!.visibility = GONE
+        mInputMethodEnhanceBar!!.visibility = VISIBLE
+        mDebugging = false
     }
 
-    private void showErrorMessage(String msg) {
-        Snackbar.make(EditorView.this, getResources().getString(R.string.text_error) + ": " + msg, Snackbar.LENGTH_LONG)
-                .setAction(R.string.text_detail, v -> LogActivityKt.start(getContext()) )
-                .show();
+    private fun showErrorMessage(msg: String) {
+        Snackbar.make(
+            this@EditorView,
+            resources.getString(R.string.text_error) + ": " + msg,
+            Snackbar.LENGTH_LONG
+        )
+            .setAction(R.string.text_detail) { v: View? ->
+                start(
+                    context
+                )
+            }
+            .show()
     }
 
-    @Override
-    public void onHintClick(CodeCompletions completions, int pos) {
-        CodeCompletion completion = completions.get(pos);
-        mEditor.insert(completion.getInsertText());
+    override fun onHintClick(completions: CodeCompletions, pos: Int) {
+        val completion = completions[pos]
+        editor!!.insert(completion.insertText)
     }
 
-    @Override
-    public void onHintLongClick(CodeCompletions completions, int pos) {
-        CodeCompletion completion = completions.get(pos);
-        if (completion.getUrl() == null)
-            return;
-        showManual(completion.getUrl(), completion.getHint());
+    override fun onHintLongClick(completions: CodeCompletions, pos: Int) {
+        val completion = completions[pos]
+        if (completion.url == null) return
+        showManual(completion.url, completion.hint)
     }
 
-    private void showManual(String url, String title) {
-        String absUrl = Pref.getDocumentationUrl() + url;
-        new ManualDialog(getContext())
-                .title(title)
-                .url(absUrl)
-                .pinToLeft(v -> {
-                    if (mDocsWebView.getIsTbs()) {
-                        mDocsWebView.getWebViewTbs().loadUrl(absUrl);
-                        mDrawerLayout.openDrawer(GravityCompat.START);
-                    } else {
-                        mDocsWebView.getWebView().loadUrl(absUrl);
-                        mDrawerLayout.openDrawer(GravityCompat.START);
-                    }
-                })
-                .show();
+    private fun showManual(url: String, title: String) {
+        val absUrl = Pref.getDocumentationUrl() + url
+        ManualDialog(context)
+            .title(title)
+            .url(absUrl)
+            .pinToLeft { v: View? ->
+
+                mDocsWebView!!.webView.loadUrl(absUrl)
+                mDrawerLayout!!.openDrawer(GravityCompat.START)
+
+            }
+            .show()
     }
 
-    @Override
-    public void onModuleLongClick(Module module) {
-        showManual(module.getUrl(), module.getName());
+    override fun onModuleLongClick(module: Module) {
+        showManual(module.url, module.name)
     }
 
-    @Override
-    public void onPropertyClick(Module m, Property property) {
-        String p = property.getKey();
-        if (!property.isVariable()) {
-            p = p + "()";
+    override fun onPropertyClick(m: Module, property: Property) {
+        var p = property.key
+        if (!property.isVariable) {
+            p = "$p()"
         }
-        if (property.isGlobal()) {
-            mEditor.insert(p);
+        if (property.isGlobal) {
+            editor!!.insert(p)
         } else {
-            mEditor.insert(m.getName() + "." + p);
+            editor!!.insert(m.name + "." + p)
         }
-        if (!property.isVariable()) {
-            mEditor.moveCursor(-1);
+        if (!property.isVariable) {
+            editor!!.moveCursor(-1)
         }
-        mFunctionsKeyboardHelper.hideFunctionsLayout(true);
+        mFunctionsKeyboardHelper!!.hideFunctionsLayout(true)
     }
 
-    @Override
-    public void onPropertyLongClick(Module m, Property property) {
-        if (TextUtils.isEmpty(property.getUrl())) {
-            showManual(m.getUrl(), property.getKey());
+    override fun onPropertyLongClick(m: Module, property: Property) {
+        if (TextUtils.isEmpty(property.url)) {
+            showManual(m.url, property.key)
         } else {
-            showManual(property.getUrl(), property.getKey());
+            showManual(property.url, property.key)
         }
     }
 
-    public int getScriptExecutionId() {
-        return mScriptExecutionId;
+    val scriptExecution: ScriptExecution?
+        get() = AutoJs.getInstance().scriptEngineService.getScriptExecution(
+            scriptExecutionId
+        )
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val bundle = Bundle()
+        val superData = super.onSaveInstanceState()
+        bundle.putParcelable("super_data", superData)
+        bundle.putInt("script_execution_id", scriptExecutionId)
+        return bundle
     }
 
-    @Nullable
-    public ScriptExecution getScriptExecution() {
-        return AutoJs.getInstance().getScriptEngineService().getScriptExecution(mScriptExecutionId);
+    override fun onRestoreInstanceState(state: Parcelable) {
+        val bundle = state as Bundle
+        val superData = bundle.getParcelable<Parcelable>("super_data")
+        scriptExecutionId = bundle.getInt("script_execution_id", ScriptExecution.NO_ID)
+        super.onRestoreInstanceState(superData)
+        setMenuItemStatus(R.id.run, scriptExecutionId == ScriptExecution.NO_ID)
     }
 
-    @Nullable
-    @Override
-    protected Parcelable onSaveInstanceState() {
-        Bundle bundle = new Bundle();
-        Parcelable superData = super.onSaveInstanceState();
-        bundle.putParcelable("super_data", superData);
-        bundle.putInt("script_execution_id", mScriptExecutionId);
-        return bundle;
+    fun destroy() {
+        editor!!.destroy()
+        mAutoCompletion!!.shutdown()
     }
 
-    @Override
-    protected void onRestoreInstanceState(Parcelable state) {
-        Bundle bundle = (Bundle) state;
-        Parcelable superData = bundle.getParcelable("super_data");
-        mScriptExecutionId = bundle.getInt("script_execution_id", ScriptExecution.NO_ID);
-        super.onRestoreInstanceState(superData);
-        setMenuItemStatus(R.id.run, mScriptExecutionId == ScriptExecution.NO_ID);
-    }
-
-    public void destroy() {
-        mEditor.destroy();
-        mAutoCompletion.shutdown();
+    companion object {
+        const val EXTRA_PATH = "path"
+        const val EXTRA_NAME = "name"
+        const val EXTRA_CONTENT = "content"
+        const val EXTRA_READ_ONLY = "readOnly"
+        const val EXTRA_SAVE_ENABLED = "saveEnabled"
+        const val EXTRA_RUN_ENABLED = "runEnabled"
     }
 }

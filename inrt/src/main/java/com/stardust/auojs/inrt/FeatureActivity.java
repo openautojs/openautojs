@@ -24,7 +24,7 @@ import androidx.annotation.RequiresApi;
 
 import com.stardust.auojs.inrt.util.MarketJavascriptInterface;
 
-import org.autojs.autoxjs.inrt.R;
+import org.openautojs.autojs.inrt.R;
 
 import java.util.List;
 

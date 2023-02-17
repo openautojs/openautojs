@@ -16,7 +16,7 @@ import com.stardust.autojs.runtime.exception.ScriptInterruptedException
 import com.stardust.autojs.script.JavaScriptSource
 import com.stardust.view.accessibility.AccessibilityService
 import com.stardust.view.accessibility.AccessibilityServiceUtils
-import org.autojs.autoxjs.inrt.R
+import org.openautojs.autojs.inrt.R
 
 
 /**

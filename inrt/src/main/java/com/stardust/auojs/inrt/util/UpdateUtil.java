@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 
 import com.linsh.utilseverywhere.ContextUtils;
 
-import org.autojs.autoxjs.inrt.R;
+import org.openautojs.autojs.inrt.R;
 import com.stardust.util.IntentUtil;
 
 import org.json.JSONObject;

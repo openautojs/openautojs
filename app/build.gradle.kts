@@ -52,6 +52,9 @@ android {
     buildFeatures {
         compose = true
     }
+    viewBinding {
+        isEnabled = false
+    }
     lint {
         abortOnError = false
         disable.addAll(listOf("MissingTranslation", "ExtraTranslation"))

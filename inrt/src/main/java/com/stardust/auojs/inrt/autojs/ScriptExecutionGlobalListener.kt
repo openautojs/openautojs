@@ -3,7 +3,7 @@ package com.stardust.auojs.inrt.autojs
 import com.stardust.app.GlobalAppContext
 import com.stardust.autojs.execution.ScriptExecution
 import com.stardust.autojs.execution.ScriptExecutionListener
-import org.autojs.autoxjs.inrt.R
+import org.openautojs.autojs.inrt.R
 
 /**
  * Created by Stardust on 2017/5/3.

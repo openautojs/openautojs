@@ -19,7 +19,7 @@ import com.stardust.autojs.script.JavaScriptSource
 import com.stardust.pio.PFiles
 import com.stardust.pio.UncheckedIOException
 import com.stardust.util.MD5
-import org.autojs.autoxjs.inrt.BuildConfig
+import org.openautojs.autojs.inrt.BuildConfig
 import java.io.File
 import java.io.IOException
 

@@ -59,7 +59,7 @@ public class TaskerScriptEditActivity extends BaseActivity {
 
     @Override
     public void finish() {
-        setResult(RESULT_OK, new Intent().putExtra(EXTRA_CONTENT, mEditorView.getEditor().getText()));
+        setResult(RESULT_OK, new Intent().putExtra(EXTRA_CONTENT, mEditorView.editor.getText()));
         TaskerScriptEditActivity.super.finish();
     }
 
