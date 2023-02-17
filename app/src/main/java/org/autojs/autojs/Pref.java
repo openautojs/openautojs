@@ -9,7 +9,7 @@ import com.stardust.app.GlobalAppContext;
 import com.stardust.autojs.runtime.accessibility.AccessibilityConfig;
 
 import org.autojs.autojs.autojs.key.GlobalKeyObserver;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 

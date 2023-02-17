@@ -22,7 +22,7 @@ import org.autojs.autojs.model.explorer.Explorers
 import org.autojs.autojs.ui.build.BuildActivity.Companion.start
 import org.autojs.autojs.ui.build.ProjectConfigActivity
 import org.autojs.autojs.ui.build.ProjectConfigActivity_
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.greenrobot.eventbus.Subscribe
 
 class ExplorerProjectToolbar : CardView {

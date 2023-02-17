@@ -23,7 +23,7 @@ import com.stardust.autojs.script.AutoFileSource;
 import com.stardust.autojs.workground.WrapContentLinearLayoutManager;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.autojs.AutoJs;
 import org.autojs.autojs.storage.database.ModelChange;
 import org.autojs.autojs.timing.TimedTaskManager;

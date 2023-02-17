@@ -17,7 +17,7 @@ import com.stardust.util.MapBuilder;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.ui.BaseActivity;
 import org.autojs.autojs.ui.widget.CommonMarkdownView;
 

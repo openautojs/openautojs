@@ -28,8 +28,8 @@ import org.autojs.autojs.timing.TimedTaskManager
 import org.autojs.autojs.timing.TimedTaskScheduler
 import org.autojs.autojs.tool.CrashHandler
 import org.autojs.autojs.ui.error.ErrorReportActivity
-import org.autojs.autoxjs.BuildConfig
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.BuildConfig
+import org.openautojs.autojs.R
 import java.lang.ref.WeakReference
 
 /**

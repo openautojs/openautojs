@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.stardust.pio.PFiles;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.model.explorer.Explorer;
 import org.autojs.autojs.model.explorer.ExplorerChangeEvent;
 import org.autojs.autojs.model.explorer.ExplorerDirPage;

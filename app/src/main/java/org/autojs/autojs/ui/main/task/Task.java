@@ -7,7 +7,7 @@ import com.stardust.autojs.script.AutoFileSource;
 import com.stardust.autojs.script.JavaScriptSource;
 import com.stardust.pio.PFiles;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.timing.IntentTask;
 import org.autojs.autojs.timing.TimedTask;
 import org.autojs.autojs.timing.TimedTaskManager;

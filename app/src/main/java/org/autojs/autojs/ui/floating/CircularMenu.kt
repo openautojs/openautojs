@@ -21,7 +21,7 @@ import com.stardust.view.accessibility.AccessibilityService.Companion.instance
 import com.stardust.view.accessibility.LayoutInspector.CaptureAvailableListener
 import com.stardust.view.accessibility.NodeInfo
 import org.autojs.autojs.Pref
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.autojs.autojs.autojs.AutoJs
 import org.autojs.autojs.autojs.record.GlobalActionRecorder
 import org.autojs.autojs.model.explorer.ExplorerDirPage

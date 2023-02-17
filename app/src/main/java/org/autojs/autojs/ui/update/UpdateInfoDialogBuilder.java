@@ -20,7 +20,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.stardust.util.IntentUtil;
 
 import org.autojs.autojs.Pref;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.external.fileprovider.AppFileProvider;
 import org.autojs.autojs.network.download.DownloadManager;
 import org.autojs.autojs.network.entity.VersionInfo;

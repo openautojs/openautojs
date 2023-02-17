@@ -10,7 +10,7 @@ import com.stardust.autojs.core.util.ProcessShell;
 import com.stardust.view.accessibility.AccessibilityServiceUtils;
 
 //import org.autojs.autojs.Pref;
-//import org.autojs.autoxjs.R;
+//import org.openautojs.autojs.R;
 
 import java.util.Locale;
 

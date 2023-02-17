@@ -10,7 +10,7 @@ import com.stardust.autojs.util.FloatingPermission;
 import com.stardust.enhancedfloaty.FloatyService;
 import com.stardust.enhancedfloaty.FloatyWindow;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 
 import java.lang.ref.WeakReference;
 

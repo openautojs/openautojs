@@ -152,7 +152,7 @@
     *;
 }
 
--keep class org.autojs.autoxjs.BuildConfig{
+-keep class org.openautojs.autojs.BuildConfig{
    *;
 }
 

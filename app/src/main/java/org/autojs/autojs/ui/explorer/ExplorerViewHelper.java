@@ -5,7 +5,7 @@ import android.graphics.Color;
 import com.stardust.app.GlobalAppContext;
 import com.stardust.pio.PFiles;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.model.explorer.ExplorerFileItem;
 import org.autojs.autojs.model.explorer.ExplorerItem;
 import org.autojs.autojs.model.explorer.ExplorerPage;

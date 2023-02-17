@@ -40,7 +40,7 @@ import org.autojs.autojs.ui.BaseActivity
 import org.autojs.autojs.ui.shortcut.ShortcutIconSelectActivity.Companion.getBitmapFromIntent
 import org.autojs.autojs.ui.shortcut.ShortcutIconSelectActivity_
 import org.autojs.autojs.ui.widget.SimpleTextWatcher
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import java.io.File
 import java.io.FileOutputStream
 

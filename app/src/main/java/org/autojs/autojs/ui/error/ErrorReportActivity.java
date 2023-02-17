@@ -11,10 +11,10 @@ import android.util.Log;
 import android.util.SparseIntArray;
 import android.widget.Toast;
 
-import org.autojs.autoxjs.BuildConfig;
+import org.openautojs.autojs.BuildConfig;
 import org.autojs.autojs.ui.BaseActivity;
 import org.autojs.autojs.theme.dialog.ThemeColorMaterialDialogBuilder;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 
 import java.util.Locale;
 import java.util.Timer;

@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.autojs.autojs.Pref
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.autojs.autojs.build.ApkBuilder
 import org.autojs.autojs.build.ApkBuilderPluginHelper
 import org.autojs.autojs.build.ApkKeyStore

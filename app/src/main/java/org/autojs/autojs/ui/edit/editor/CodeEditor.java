@@ -12,7 +12,7 @@ import com.stardust.autojs.script.JsBeautifier;
 import com.stardust.util.ClipboardUtil;
 import com.stardust.util.TextUtils;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.ui.edit.theme.Theme;
 
 import java.util.LinkedHashMap;

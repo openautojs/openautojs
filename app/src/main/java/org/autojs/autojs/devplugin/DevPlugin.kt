@@ -17,8 +17,8 @@ import org.autojs.autojs.devplugin.message.Hello
 import org.autojs.autojs.devplugin.message.HelloResponse
 import org.autojs.autojs.devplugin.message.LogData
 import org.autojs.autojs.devplugin.message.Message
-import org.autojs.autoxjs.BuildConfig
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.BuildConfig
+import org.openautojs.autojs.R
 import java.io.File
 import java.net.SocketTimeoutException
 import java.util.*

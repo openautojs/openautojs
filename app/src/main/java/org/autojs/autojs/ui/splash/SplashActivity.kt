@@ -27,7 +27,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.autojs.autojs.ui.main.MainActivity
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 
 /**
  * Created by Stardust on 2017/7/7.

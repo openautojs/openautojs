@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 import org.autojs.autojs.Pref
 import org.autojs.autojs.autojs.AutoJs
 import org.autojs.autojs.model.script.Scripts.run
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.FileInputStream

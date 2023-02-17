@@ -15,7 +15,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.autojs.autojs.Pref;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.autojs.AutoJs;
 import org.autojs.autojs.external.fileprovider.AppFileProvider;
 import org.autojs.autojs.external.foreground.ForegroundService;

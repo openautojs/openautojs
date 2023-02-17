@@ -2,7 +2,7 @@ package org.autojs.autojs.ui.common;
 
 import android.content.Context;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.theme.dialog.ThemeColorMaterialDialogBuilder;
 
 import io.reactivex.Observable;

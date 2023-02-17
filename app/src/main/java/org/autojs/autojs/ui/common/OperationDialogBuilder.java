@@ -16,7 +16,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.stardust.theme.ThemeColor;
 import com.stardust.theme.widget.ThemeColorImageView;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 
 import java.util.ArrayList;
 

@@ -8,7 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.autojs.autojs.network.VersionService2
 import org.autojs.autojs.network.entity.GithubReleaseInfo
 import org.autojs.autojs.network.entity.isLatestVersion

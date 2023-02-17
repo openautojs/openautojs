@@ -19,7 +19,7 @@ import com.stardust.app.OnActivityResultDelegate;
 import com.stardust.autojs.engine.JavaScriptEngine;
 import com.stardust.autojs.execution.ScriptExecution;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.autojs.AutoJs;
 import org.autojs.autojs.model.sample.SampleFile;
 import org.autojs.autojs.ui.BaseActivity;

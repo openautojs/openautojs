@@ -1,7 +1,7 @@
 package org.autojs.autojs.network.entity
 
 import com.google.gson.annotations.SerializedName
-import org.autojs.autoxjs.BuildConfig
+import org.openautojs.autojs.BuildConfig
 
 class GithubReleaseInfoList : ArrayList<GithubReleaseInfo>()
 

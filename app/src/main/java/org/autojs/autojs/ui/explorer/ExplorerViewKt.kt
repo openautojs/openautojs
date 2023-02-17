@@ -22,7 +22,7 @@ import com.stardust.pio.PFiles
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.autojs.autojs.model.explorer.*
 import org.autojs.autojs.model.script.ScriptFile
 import org.autojs.autojs.model.script.Scripts.edit

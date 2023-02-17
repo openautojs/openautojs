@@ -3,7 +3,7 @@ package org.autojs.autojs.accessibility;
 import android.util.SparseArray;
 import android.view.accessibility.AccessibilityEvent;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import com.stardust.util.SparseArrayEntries;
 
 import static android.view.accessibility.AccessibilityEvent.TYPE_VIEW_CLICKED;

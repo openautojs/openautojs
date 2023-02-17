@@ -40,8 +40,8 @@ import com.heinrichreimersoftware.androidissuereporter.util.ThemeUtils;
 import com.stardust.theme.ThemeColorManager;
 
 import org.autojs.autojs.ui.BaseActivity;
-import org.autojs.autoxjs.BuildConfig;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.BuildConfig;
+import org.openautojs.autojs.R;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.RequestException;

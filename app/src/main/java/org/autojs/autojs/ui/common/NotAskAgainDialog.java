@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.theme.dialog.ThemeColorMaterialDialogBuilder;
 import com.stardust.util.HashUtils;
 

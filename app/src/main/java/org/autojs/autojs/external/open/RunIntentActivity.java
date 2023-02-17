@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.stardust.autojs.script.StringScriptSource;
 import com.stardust.pio.PFiles;
 import org.autojs.autojs.external.ScriptIntents;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.model.script.Scripts;
 
 import java.io.FileNotFoundException;

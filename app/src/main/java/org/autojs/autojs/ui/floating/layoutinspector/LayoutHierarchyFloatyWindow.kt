@@ -33,7 +33,7 @@ import com.afollestad.materialdialogs.Theme
 import com.stardust.app.DialogUtils
 import com.stardust.enhancedfloaty.FloatyService
 import com.stardust.view.accessibility.NodeInfo
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.autojs.autojs.ui.codegeneration.CodeGenerateDialog
 import org.autojs.autojs.ui.compose.theme.AutoXJsTheme
 import org.autojs.autojs.ui.floating.FloatyWindowManger

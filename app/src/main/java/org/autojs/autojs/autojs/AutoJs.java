@@ -21,9 +21,9 @@ import com.stardust.view.accessibility.AccessibilityService;
 import com.stardust.view.accessibility.LayoutInspector;
 import com.stardust.view.accessibility.NodeInfo;
 
-import org.autojs.autoxjs.BuildConfig;
+import org.openautojs.autojs.BuildConfig;
 import org.autojs.autojs.Pref;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.devplugin.DevPlugin;
 import org.autojs.autojs.external.fileprovider.AppFileProvider;
 import org.autojs.autojs.tool.AccessibilityServiceTool;

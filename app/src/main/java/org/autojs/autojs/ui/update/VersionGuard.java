@@ -2,7 +2,7 @@ package org.autojs.autojs.ui.update;
 
 import android.app.Activity;
 
-import org.autojs.autoxjs.BuildConfig;
+import org.openautojs.autojs.BuildConfig;
 import org.autojs.autojs.network.VersionService;
 import org.autojs.autojs.network.entity.VersionInfo;
 import org.autojs.autojs.tool.SimpleObserver;

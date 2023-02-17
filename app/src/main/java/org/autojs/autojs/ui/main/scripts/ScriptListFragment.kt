@@ -45,7 +45,7 @@ import org.autojs.autojs.ui.build.ProjectConfigActivity
 import org.autojs.autojs.ui.build.ProjectConfigActivity_
 import org.autojs.autojs.ui.viewmodel.ExplorerItemList.SortConfig
 import org.autojs.autojs.ui.widget.fillMaxSize
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 
 /**
  * Created by wilinz on 2022/7/15.

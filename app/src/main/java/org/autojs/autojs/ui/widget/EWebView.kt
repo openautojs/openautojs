@@ -28,7 +28,7 @@ import com.stardust.autojs.script.StringScriptSource
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.autojs.autojs.Pref
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.autojs.autojs.model.script.Scripts
 import org.autojs.autojs.tool.ImageSelector
 import java.io.File

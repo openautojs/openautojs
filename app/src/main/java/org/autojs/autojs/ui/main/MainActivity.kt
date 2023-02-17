@@ -32,7 +32,7 @@ import com.stardust.util.IntentUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.autojs.autojs.Pref
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.autojs.autojs.autojs.AutoJs
 import org.autojs.autojs.external.foreground.ForegroundService
 import org.autojs.autojs.timing.TimedTaskScheduler

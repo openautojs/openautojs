@@ -15,7 +15,7 @@ import com.stardust.autojs.script.ScriptSource
 import com.stardust.util.IntentUtil
 
 import org.autojs.autojs.Pref
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.autojs.autojs.autojs.AutoJs
 import org.autojs.autojs.external.ScriptIntents
 import org.autojs.autojs.external.fileprovider.AppFileProvider

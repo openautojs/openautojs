@@ -1,7 +1,7 @@
 package org.autojs.autojs.network.entity;
 
 
-import org.autojs.autoxjs.BuildConfig;
+import org.openautojs.autojs.BuildConfig;
 
 /**
  * Created by Stardust on 2017/9/20.

@@ -15,7 +15,7 @@ import com.stardust.pio.PFile;
 import com.stardust.pio.PFiles;
 
 import org.autojs.autojs.Pref;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.build.ApkSigner;
 
 import org.autojs.autojs.theme.dialog.ThemeColorMaterialDialogBuilder;

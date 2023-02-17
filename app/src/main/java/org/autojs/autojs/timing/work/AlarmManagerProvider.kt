@@ -13,7 +13,7 @@ import android.os.Build
 import android.os.SystemClock
 import android.util.Log
 import org.autojs.autojs.App
-import org.autojs.autoxjs.BuildConfig
+import org.openautojs.autojs.BuildConfig
 import org.autojs.autojs.external.ScriptIntents
 import org.autojs.autojs.timing.TimedTask
 import org.autojs.autojs.timing.TimedTaskManager

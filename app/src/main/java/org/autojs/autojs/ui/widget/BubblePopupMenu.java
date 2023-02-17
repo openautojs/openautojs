@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 
 import java.util.List;
 

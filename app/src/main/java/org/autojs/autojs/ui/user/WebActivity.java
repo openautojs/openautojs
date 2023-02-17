@@ -4,7 +4,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 
 import com.stardust.app.OnActivityResultDelegate;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.ui.BaseActivity;
 import org.autojs.autojs.ui.widget.EWebView;
 

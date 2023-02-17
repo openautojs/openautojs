@@ -3,7 +3,7 @@ package org.autojs.autojs.tool;
 import android.content.Context;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 
 /**
  * Created by Stardust on 2017/4/18.

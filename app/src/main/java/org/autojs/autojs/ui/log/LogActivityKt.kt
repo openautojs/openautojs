@@ -24,7 +24,7 @@ import org.autojs.autojs.autojs.AutoJs
 import org.autojs.autojs.ui.compose.theme.AutoXJsTheme
 import org.autojs.autojs.ui.compose.util.SetSystemUI
 import org.autojs.autojs.ui.widget.fillMaxSize
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 
 class LogActivityKt : ComponentActivity() {
 

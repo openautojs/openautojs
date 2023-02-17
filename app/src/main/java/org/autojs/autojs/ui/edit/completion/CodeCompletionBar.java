@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.stardust.autojs.workground.WrapContentLinearLayoutManager;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.model.autocomplete.CodeCompletions;
 
 /**

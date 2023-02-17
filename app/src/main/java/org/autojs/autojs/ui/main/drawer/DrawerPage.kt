@@ -60,7 +60,7 @@ import org.autojs.autojs.ui.compose.widget.MyIcon
 import org.autojs.autojs.ui.compose.widget.MySwitch
 import org.autojs.autojs.ui.floating.FloatyWindowManger
 import org.autojs.autojs.ui.settings.SettingsActivity_
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.joda.time.DateTimeZone
 import org.joda.time.Instant
 

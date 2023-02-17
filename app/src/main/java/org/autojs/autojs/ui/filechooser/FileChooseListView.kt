@@ -16,7 +16,7 @@ import butterknife.OnCheckedChanged
 import butterknife.OnClick
 import com.stardust.pio.PFile
 import com.stardust.pio.PFiles
-import org.autojs.autoxjs.R
+import org.openautojs.autojs.R
 import org.autojs.autojs.model.explorer.ExplorerItem
 import org.autojs.autojs.model.explorer.ExplorerPage
 import org.autojs.autojs.model.script.ScriptFile

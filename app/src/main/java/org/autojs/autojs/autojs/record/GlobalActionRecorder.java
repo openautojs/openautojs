@@ -13,7 +13,7 @@ import com.stardust.autojs.core.record.inputevent.InputEventToAutoFileRecorder;
 import com.stardust.autojs.core.record.inputevent.InputEventToRootAutomatorRecorder;
 import com.stardust.autojs.core.record.inputevent.TouchRecorder;
 import org.autojs.autojs.Pref;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.ui.common.ScriptOperations;
 import org.autojs.autojs.theme.dialog.ThemeColorMaterialDialogBuilder;
 import com.stardust.util.ClipboardUtil;

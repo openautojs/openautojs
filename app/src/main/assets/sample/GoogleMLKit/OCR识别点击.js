@@ -2,7 +2,7 @@
 var mainActivity = "org.autojs.autojs.ui.main.MainActivity"
 if (currentActivity != mainActivity) {
     app.startActivity({
-        packageName: "org.autojs.autoxjs.v6",
+        packageName: "org.openautojs.autojs",
         className: mainActivity,
     });
     waitForActivity(mainActivity)

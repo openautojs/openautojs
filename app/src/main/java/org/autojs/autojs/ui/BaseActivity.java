@@ -23,7 +23,7 @@ import com.stardust.app.GlobalAppContext;
 import com.stardust.theme.ThemeColorManager;
 
 import org.autojs.autojs.Pref;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

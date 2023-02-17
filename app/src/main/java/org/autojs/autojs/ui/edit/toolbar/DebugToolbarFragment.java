@@ -18,7 +18,7 @@ import com.stardust.pio.PFiles;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.ui.edit.EditorView;
 import org.autojs.autojs.ui.edit.debug.CodeEvaluator;
 import org.autojs.autojs.ui.edit.debug.DebugBar;

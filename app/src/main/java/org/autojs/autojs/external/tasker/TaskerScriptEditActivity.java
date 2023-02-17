@@ -5,7 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
-import org.autojs.autoxjs.R;
+import org.openautojs.autojs.R;
 import org.autojs.autojs.timing.TaskReceiver;
 import org.autojs.autojs.tool.Observers;
 import org.autojs.autojs.ui.BaseActivity;
