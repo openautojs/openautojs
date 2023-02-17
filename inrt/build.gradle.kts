@@ -19,7 +19,7 @@ android {
     buildToolsVersion = versions.buildTool
     compileSdk = versions.compile
     defaultConfig {
-        applicationId = "org.autojs.autoxjs.inrt"
+        applicationId = "org.openautojs.autojs.inrt"
         minSdk = versions.mini
         targetSdk = versions.target
         versionCode = versions.appVersionCode

@@ -31,7 +31,7 @@ android {
     compileSdk = versions.compile
 
     defaultConfig {
-        applicationId = "org.autojs.autoxjs"
+        applicationId = "org.openautojs.autojs"
         minSdk = versions.mini
         targetSdk = versions.target
         versionCode = versions.appVersionCode
