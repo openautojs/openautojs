@@ -2,7 +2,7 @@
 
 [简体中文文档](README_zh-CN.md)
 
-## BriefIntroduction
+## Brief Introduction
 
 A JavaScript runtime and development environment on the Android platform that supports accessibility services, with development goals similar to JsBox and Workflow.  
 This project is based on Autox.js to establish the openautojs community, this project aims to allow users to enjoy free and open source Auto .js  
@@ -16,7 +16,7 @@ This project is based on Autox.js to establish the openautojs community, this pr
 ### Download address：
 [https://github.com/openautojs/openautojs/releases](https://github.com/openautojs/openautojs/releases)  
 
-#### APKReleaseNotes：
+#### APK release notes：
 - universal: General version (don't care about the size of the installation package, too lazy to choose this version, including the following 2 CPU architecture so)
 - armeabi-v7a: 32-bit ARM device(Standby machine preferred)
 - arm64-v8a: 64-bit ARM devices (mainstream flagships)
