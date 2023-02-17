@@ -37,7 +37,7 @@
   <string name="github">Software kildekode</string>
   <string name="text_already_copy_to_clip">Kopieret til udklipsholder</string>
   <string name="text_qq_already_copy_to_clip">QQ-gruppenummeret er blevet kopieret til udklipsholderen</string>
-  <string name="share_app">[Autox.js] Download-adresse: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Download-adresse: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Flydende vindue</string>
   <string name="text_error_report">Fejlrapport</string>
   <string name="text_press_again_to_exit">Tryk igen for at afslutte programmet</string>

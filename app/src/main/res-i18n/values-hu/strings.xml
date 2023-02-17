@@ -37,7 +37,7 @@
   <string name="github">Szoftver forráskódja</string>
   <string name="text_already_copy_to_clip">Vágólapra másolva</string>
   <string name="text_qq_already_copy_to_clip">A QQ csoport számát a vágólapra másolta</string>
-  <string name="share_app">[Autox.js] Letöltési cím: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Letöltési cím: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Lebegő ablak</string>
   <string name="text_error_report">Hibajelentés</string>
   <string name="text_press_again_to_exit">Nyomja meg újra a programból való kilépéshez</string>

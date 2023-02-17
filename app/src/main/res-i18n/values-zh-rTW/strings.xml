@@ -37,7 +37,7 @@
   <string name="github">軟件源代碼</string>
   <string name="text_already_copy_to_clip">已復製到剪貼板</string>
   <string name="text_qq_already_copy_to_clip">QQ群號已復製到剪貼板</string>
-  <string name="share_app">[Autox.js]下載地址：https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js]下載地址：https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">懸浮窗</string>
   <string name="text_error_report">錯誤報告</string>
   <string name="text_press_again_to_exit">再按一次退出程序</string>

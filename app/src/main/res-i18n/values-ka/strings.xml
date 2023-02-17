@@ -37,7 +37,7 @@
   <string name="github">პროგრამული უზრუნველყოფის წყარო კოდი</string>
   <string name="text_already_copy_to_clip">კოპირებულია ბუფერში</string>
   <string name="text_qq_already_copy_to_clip">QQ ჯგუფის ნომერი დაკოპირდა ბუფერში</string>
-  <string name="share_app">[Autox.js] ჩამოტვირთვის მისამართი: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] ჩამოტვირთვის მისამართი: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">მცურავი ფანჯარა</string>
   <string name="text_error_report">შეცდომის ანგარიში</string>
   <string name="text_press_again_to_exit">დააჭირეთ ისევ პროგრამიდან გასასვლელად</string>

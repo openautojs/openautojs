@@ -37,7 +37,7 @@
   <string name="github">सॉफ्टवेअर स्त्रोत कोड</string>
   <string name="text_already_copy_to_clip">क्लिपबोर्डवर कॉपी केले</string>
   <string name="text_qq_already_copy_to_clip">QQ गट क्रमांक क्लिपबोर्डवर कॉपी केला गेला आहे</string>
-  <string name="share_app">[Autox.js] पत्ता डाउनलोड करा: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] पत्ता डाउनलोड करा: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">फ्लोटिंग विंडो</string>
   <string name="text_error_report">त्रुटी अहवाल</string>
   <string name="text_press_again_to_exit">प्रोग्राममधून बाहेर पडण्यासाठी पुन्हा दाबा</string>

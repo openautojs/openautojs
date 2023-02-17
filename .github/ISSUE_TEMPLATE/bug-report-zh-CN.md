@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 1. Autox.js 版本：629
-2. Autox.js 下载渠道：https://github.com/kkevsekk1/AutoX/releases
+2. Autox.js 下载渠道：https://github.com/openautojs/openautojs/releases
 3. Android 版本：Android 10
 4. Android 机型：小米10
 5. Android 系统类别：MIUI

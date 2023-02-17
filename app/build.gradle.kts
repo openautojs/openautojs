@@ -133,14 +133,6 @@ android {
 //            buildConfigField("String", "APPID", "\"?id=21\"")
             manifestPlaceholders.putAll(mapOf("appName" to "@string/app_name"))
         }
-        create("v6") {
-            applicationIdSuffix = ".v6"
-            versionCode = versions.devVersionCode
-            versionName = versions.devVersionName
-            buildConfigField("String", "CHANNEL", "\"v6\"")
-//            buildConfigField("String", "APPID", "\"?id=23\"")
-            manifestPlaceholders.putAll(mapOf("appName" to "Autox.js v6"))
-        }
     }
 
     sourceSets {
@@ -187,8 +179,8 @@ dependencies {
     implementation("androidx.compose.ui:ui:$compose_version")
     implementation("androidx.compose.material:material:$compose_version")
     implementation("androidx.compose.ui:ui-tooling-preview:$compose_version")
-    implementation("androidx.activity:activity-compose:1.3.1")
-    implementation("org.chromium.net:cronet-embedded:76.3809.111")
+    implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("org.chromium.net:cronet-embedded:108.5359.79")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
     debugImplementation("androidx.compose.ui:ui-tooling:$compose_version")
 
@@ -198,7 +190,7 @@ dependencies {
     }
     testImplementation("junit:junit:4.13.2")
     // Kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     // Android Annotations
     annotationProcessor("org.androidannotations:androidannotations:$AAVersion")
     kapt("org.androidannotations:androidannotations:$AAVersion")
@@ -212,9 +204,9 @@ dependencies {
     kapt("com.jakewharton:butterknife-compiler:10.2.3")
     // Android supports
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.appcompat:appcompat:1.4.2") //
+    implementation("androidx.appcompat:appcompat:1.6.1") //
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.android.material:material:1.7.0-alpha03")
+    implementation("com.google.android.material:material:1.8.0")
     // Personal libraries
     implementation("com.github.hyb1996:MutableTheme:1.0.0")
     // Material Dialogs
@@ -262,8 +254,8 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.8.0") {
         exclude(group = "com.android.support")
     }
-    kapt("com.github.bumptech.glide:compiler:4.12.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    kapt("com.github.bumptech.glide:compiler:4.14.2")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
     //joda time
     implementation("net.danlew:android.joda:2.10.14")
     // Tasker Plugin
@@ -278,7 +270,7 @@ dependencies {
         exclude(group = "com.android.support")
     }
     // WorkManager
-    implementation("androidx.work:work-runtime:2.7.1")
+    implementation("androidx.work:work-runtime:2.8.0")
     // Android job
     implementation("com.evernote:android-job:1.4.2")
     // Optional, if you use support library fragments:

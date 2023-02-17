@@ -37,7 +37,7 @@
   <string name="github">Programmatūras pirmkods</string>
   <string name="text_already_copy_to_clip">Iekopēts starpliktuvē</string>
   <string name="text_qq_already_copy_to_clip">QQ grupas numurs ir kopēts starpliktuvē</string>
-  <string name="share_app">[Autox.js] Lejupielādes adrese: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Lejupielādes adrese: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Peldošs logs</string>
   <string name="text_error_report">Kļūdu ziņojums</string>
   <string name="text_press_again_to_exit">Nospiediet vēlreiz, lai izietu no programmas</string>

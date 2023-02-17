@@ -37,7 +37,7 @@
   <string name="github">Программалык камсыздоонун булак коду</string>
   <string name="text_already_copy_to_clip">Алмашуу буферине көчүрүлдү</string>
   <string name="text_qq_already_copy_to_clip">QQ тобунун номери алмашуу буферине көчүрүлдү</string>
-  <string name="share_app">[Autox.js] Жүктөө дареги: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Жүктөө дареги: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Калкыма терезе</string>
   <string name="text_error_report">Ката отчету</string>
   <string name="text_press_again_to_exit">Программадан чыгуу үчүн кайра басыңыз</string>

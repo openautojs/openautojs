@@ -37,7 +37,7 @@
   <string name="github">Πηγαίος κώδικας λογισμικού</string>
   <string name="text_already_copy_to_clip">Αντιγράφηκε στο πρόχειρο</string>
   <string name="text_qq_already_copy_to_clip">Ο αριθμός της ομάδας QQ έχει αντιγραφεί στο πρόχειρο</string>
-  <string name="share_app">[Autox.js] Διεύθυνση λήψης: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Διεύθυνση λήψης: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Πλωτό παράθυρο</string>
   <string name="text_error_report">Αναφορά σφάλματος</string>
   <string name="text_press_again_to_exit">Πατήστε ξανά για έξοδο από το πρόγραμμα</string>

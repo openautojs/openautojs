@@ -37,7 +37,7 @@
   <string name="github">Програм хангамжийн эх код</string>
   <string name="text_already_copy_to_clip">Санах ой руу хуулсан</string>
   <string name="text_qq_already_copy_to_clip">QQ бүлгийн дугаарыг санах ойд хуулсан</string>
-  <string name="share_app">[Autox.js] Татаж авах хаяг: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Татаж авах хаяг: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Хөвөгч цонх</string>
   <string name="text_error_report">Алдааны тайлан</string>
   <string name="text_press_again_to_exit">Програмаас гарахын тулд дахин дарна уу</string>

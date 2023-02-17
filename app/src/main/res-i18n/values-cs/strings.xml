@@ -37,7 +37,7 @@
   <string name="github">Zdrojový kód softwaru</string>
   <string name="text_already_copy_to_clip">Zkopírován do schránky</string>
   <string name="text_qq_already_copy_to_clip">Číslo skupiny QQ bylo zkopírováno do schránky</string>
-  <string name="share_app">[Autox.js] Adresa ke stažení: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Adresa ke stažení: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Plovoucí okno</string>
   <string name="text_error_report">Chybové hlášení</string>
   <string name="text_press_again_to_exit">Dalším stisknutím opustíte program</string>

@@ -37,7 +37,7 @@
   <string name="github">Programinės įrangos šaltinio kodas</string>
   <string name="text_already_copy_to_clip">Nukopijuota į mainų sritį</string>
   <string name="text_qq_already_copy_to_clip">QQ grupės numeris buvo nukopijuotas į mainų sritį</string>
-  <string name="share_app">[Autox.js] Atsisiuntimo adresas: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Atsisiuntimo adresas: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Plaukiojantis langas</string>
   <string name="text_error_report">Klaidų ataskaita</string>
   <string name="text_press_again_to_exit">Paspauskite dar kartą, kad išeitumėte iš programos</string>

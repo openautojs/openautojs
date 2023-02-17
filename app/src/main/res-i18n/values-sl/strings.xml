@@ -37,7 +37,7 @@
   <string name="github">Izvorna koda programske opreme</string>
   <string name="text_already_copy_to_clip">Kopirano v odložišče</string>
   <string name="text_qq_already_copy_to_clip">Številka skupine QQ je bila kopirana v odložišče</string>
-  <string name="share_app">[Autox.js] Naslov za prenos: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Naslov za prenos: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Lebdeče okno</string>
   <string name="text_error_report">Poročilo o napaki</string>
   <string name="text_press_again_to_exit">Ponovno pritisnite za izhod iz programa</string>

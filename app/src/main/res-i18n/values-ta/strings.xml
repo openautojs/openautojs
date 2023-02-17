@@ -37,7 +37,7 @@
   <string name="github">மென்பொருள் மூல குறியீடு</string>
   <string name="text_already_copy_to_clip">கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது</string>
   <string name="text_qq_already_copy_to_clip">QQ குழு எண் கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது</string>
-  <string name="share_app">[Autox.js] பதிவிறக்க முகவரி: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] பதிவிறக்க முகவரி: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">மிதக்கும் ஜன்னல்</string>
   <string name="text_error_report">பிழை அறிக்கை</string>
   <string name="text_press_again_to_exit">நிரலிலிருந்து வெளியேற மீண்டும் அழுத்தவும்</string>

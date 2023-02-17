@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name" translatable="false">Autox.js</string>
+    <string name="app_name" translatable="false">OpenAuto.js</string>
     <string name="text_broadcast_action_prefix" translatable="false">android.intent.action.</string>
     <string name="text_en_import" translatable="false">import</string>
     <string name="dex_crcs" translatable="false">2184044085\n3566596539\npJTCkHuhypD9i3UBQ55XQw==RtXsgCTVFA7VYhLeF1TSkg==</string>
     <string name="format_default_package_name" formatted="true" translatable="false">com.script.%s</string>
-    <string name="powered_by_autojs" translatable="false">Powered by Autoxjs.com</string>
-    <string name="my_github" translatable="false">https://github.com/kkevsekk1/autox</string>
+    <string name="powered_by_autojs" translatable="false">Powered by openautojs</string>
+    <string name="my_github" translatable="false">https://github.com/openautojs/openautojs</string>
     <string name="copyright" translatable="false">Copyright©2020-2022 All right reserves.</string>
-    <string name="developer" translatable="false">aaron</string>
+    <string name="developer" translatable="false">openautojs</string>
     <string name="qq" translatable="false">895775483</string>
-    <string name="text_qq" translatable="false">QQ群：895775483</string>
-    <string name="email" translatable="false">chengshulun@live.com</string>
+    <string name="text_qq" translatable="false">QQ群：</string>
+    <string name="email" translatable="false">openautojs@protonmail.com</string>
     <string name="default_main_file_name" translatable="false">main.js</string>
 
     <string name="key_auto_backup" translatable="false">key_auto_back</string>
@@ -69,7 +69,7 @@
     <string name="github">软件源代码</string>
     <string name="text_already_copy_to_clip">已复制到剪贴板</string>
     <string name="text_qq_already_copy_to_clip">QQ群号已复制到剪贴板</string>
-    <string name="share_app">[Autox.js]下载地址：https://github.com/kkevsekk1/AutoX/releases </string>
+    <string name="share_app">[Autox.js]下载地址：https://github.com/openautojs/openautojs/releases </string>
     <string name="text_floating_window">悬浮窗</string>
     <string name="text_error_report">错误报告</string>
     <string name="text_press_again_to_exit">再按一次退出程序</string>

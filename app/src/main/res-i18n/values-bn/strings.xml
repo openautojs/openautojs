@@ -37,7 +37,7 @@
   <string name="github">সফটওয়্যার সোর্স কোড</string>
   <string name="text_already_copy_to_clip">ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
   <string name="text_qq_already_copy_to_clip">QQ গ্রুপ নম্বরটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
-  <string name="share_app">[Autox.js] ডাউনলোড ঠিকানা: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] ডাউনলোড ঠিকানা: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">ভাসমান জানালা</string>
   <string name="text_error_report">ভুলের তথ্য</string>
   <string name="text_press_again_to_exit">প্রোগ্রাম থেকে প্রস্থান করতে আবার টিপুন</string>

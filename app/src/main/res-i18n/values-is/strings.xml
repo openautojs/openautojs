@@ -37,7 +37,7 @@
   <string name="github">Frumkóða hugbúnaðar</string>
   <string name="text_already_copy_to_clip">Afritað á klemmuspjald</string>
   <string name="text_qq_already_copy_to_clip">QQ hópnúmerið hefur verið afritað á klemmuspjaldið</string>
-  <string name="share_app">[Autox.js] Heimilisfang niðurhals: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Heimilisfang niðurhals: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Fljótandi gluggi</string>
   <string name="text_error_report">Villuskýrslu</string>
   <string name="text_press_again_to_exit">Ýttu aftur til að hætta forritinu</string>

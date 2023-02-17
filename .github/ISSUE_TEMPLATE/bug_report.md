@@ -9,7 +9,7 @@ assignees: ''
 ---
 
 1. Autox.js version: 6.2.9
-2. Autox.js download channel: https://github.com/kkevsekk1/AutoX/releases
+2. Autox.js download channel: https://github.com/openautojs/openautojs/releases
 3. Android version: Android 10
 4. Android model: xiaomi 10
 5. Android system category: MIUI 11

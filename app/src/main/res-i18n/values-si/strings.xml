@@ -37,7 +37,7 @@
   <string name="github">මෘදුකාංග මූල කේතය</string>
   <string name="text_already_copy_to_clip">පසුරු පුවරුවට පිටපත් කර ඇත</string>
   <string name="text_qq_already_copy_to_clip">QQ කණ්ඩායම් අංකය පසුරු පුවරුවට පිටපත් කර ඇත</string>
-  <string name="share_app">[Autox.js] බාගත කිරීමේ ලිපිනය: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] බාගත කිරීමේ ලිපිනය: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">පාවෙන කවුළුව</string>
   <string name="text_error_report">දෝෂ වාර්තාව</string>
   <string name="text_press_again_to_exit">වැඩසටහනෙන් පිටවීමට නැවත ඔබන්න</string>

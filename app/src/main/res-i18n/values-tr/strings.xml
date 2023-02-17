@@ -37,7 +37,7 @@
   <string name="github">Yazılım kaynak kodu</string>
   <string name="text_already_copy_to_clip">Panoya kopyalandı</string>
   <string name="text_qq_already_copy_to_clip">QQ grup numarası panoya kopyalandı</string>
-  <string name="share_app">[Autox.js] İndirme adresi: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] İndirme adresi: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Yüzer pencere</string>
   <string name="text_error_report">Hata raporu</string>
   <string name="text_press_again_to_exit">Programdan çıkmak için tekrar basın</string>

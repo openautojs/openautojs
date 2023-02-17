@@ -37,7 +37,7 @@
   <string name="github">ລະຫັດແຫຼ່ງຊອບແວ</string>
   <string name="text_already_copy_to_clip">ສຳເນົາໃສ່ຄລິບບອດແລ້ວ</string>
   <string name="text_qq_already_copy_to_clip">ໝາຍເລກກຸ່ມ QQ ໄດ້ຖືກສຳເນົາໃສ່ຄລິບບອດແລ້ວ</string>
-  <string name="share_app">[Autox.js] ທີ່ຢູ່ດາວໂຫຼດ: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] ທີ່ຢູ່ດາວໂຫຼດ: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">ປ່ອງຢ້ຽມທີ່ເລື່ອນໄດ້</string>
   <string name="text_error_report">ບົດ​ລາຍ​ງານ​ຄວາມ​ຜິດ​ພາດ​</string>
   <string name="text_press_again_to_exit">ກົດອີກເທື່ອຫນຶ່ງເພື່ອອອກຈາກໂຄງການ</string>

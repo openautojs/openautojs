@@ -37,7 +37,7 @@
   <string name="github">ソフトウェアのソースコード</string>
   <string name="text_already_copy_to_clip">クリップボードにコピー</string>
   <string name="text_qq_already_copy_to_clip">QQ グループ番号がクリップボードにコピーされました</string>
-  <string name="share_app">【Autox.js】ダウンロードアドレス：https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">【Autox.js】ダウンロードアドレス：https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">フローティングウィンドウ</string>
   <string name="text_error_report">エラーレポート</string>
   <string name="text_press_again_to_exit">もう一度押すと、プログラムを終了します</string>

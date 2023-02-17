@@ -37,7 +37,7 @@
   <string name="github">Ծրագրային ապահովման աղբյուրի կոդը</string>
   <string name="text_already_copy_to_clip">Պատճենված է clipboard-ում</string>
   <string name="text_qq_already_copy_to_clip">QQ խմբի համարը պատճենվել է clipboard-ում</string>
-  <string name="share_app">[Autox.js] Ներբեռնման հասցեն՝ https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Ներբեռնման հասցեն՝ https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Լողացող պատուհան</string>
   <string name="text_error_report">Սխալի հաշվետվություն</string>
   <string name="text_press_again_to_exit">Կրկին սեղմեք՝ ծրագրից դուրս գալու համար</string>

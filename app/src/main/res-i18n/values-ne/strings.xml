@@ -37,7 +37,7 @@
   <string name="github">सफ्टवेयर स्रोत कोड</string>
   <string name="text_already_copy_to_clip">क्लिपबोर्डमा प्रतिलिपि गरियो</string>
   <string name="text_qq_already_copy_to_clip">QQ समूह नम्बर क्लिपबोर्डमा प्रतिलिपि गरिएको छ</string>
-  <string name="share_app">[Autox.js] ठेगाना डाउनलोड गर्नुहोस्: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] ठेगाना डाउनलोड गर्नुहोस्: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">फ्लोटिंग विन्डो</string>
   <string name="text_error_report">त्रुटि रिपोर्ट</string>
   <string name="text_press_again_to_exit">कार्यक्रमबाट बाहिर निस्कन फेरि थिच्नुहोस्</string>

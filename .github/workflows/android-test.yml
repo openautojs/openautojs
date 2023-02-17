@@ -18,10 +18,6 @@ jobs:
       - name: set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 15
-      - name: set up kotlin
-        uses: fwilhe2/setup-kotlin@main
-        with:
-          version: 1.6.20
+          java-version: 11
       - name: Build with Gradle
         run: chmod 777 ./gradlew && ./gradlew :inrt:assemble &&  ./gradlew inrt:cp2APP && ./gradlew :app:assembleRelease

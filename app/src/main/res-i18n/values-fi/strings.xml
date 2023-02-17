@@ -37,7 +37,7 @@
   <string name="github">Ohjelmiston lähdekoodi</string>
   <string name="text_already_copy_to_clip">Kopioitu leikepöydälle</string>
   <string name="text_qq_already_copy_to_clip">QQ-ryhmän numero on kopioitu leikepöydälle</string>
-  <string name="share_app">[Autox.js] Latausosoite: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Latausosoite: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Kelluva ikkuna</string>
   <string name="text_error_report">Virhe raportti</string>
   <string name="text_press_again_to_exit">Paina uudelleen poistuaksesi ohjelmasta</string>

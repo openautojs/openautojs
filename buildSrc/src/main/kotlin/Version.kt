@@ -22,10 +22,6 @@ data class Versions(
     val buildTool: String = "32.0.0",
     @SerializedName("compile")
     val compile: Int = 0,
-    @SerializedName("devVersionCode")
-    val devVersionCode: Int = 634,
-    @SerializedName("devVersionName")
-    val devVersionName: String = "6.3.4",
     @SerializedName("IDE")
     val ide: String = "Android Studio Bumblebee | 2021.1.1",
     @SerializedName("JDK")

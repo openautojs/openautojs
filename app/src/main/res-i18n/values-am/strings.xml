@@ -37,7 +37,7 @@
   <string name="github">የሶፍትዌር ምንጭ ኮድ</string>
   <string name="text_already_copy_to_clip">ወደ ቅንጥብ ሰሌዳ ተቀድቷል።</string>
   <string name="text_qq_already_copy_to_clip">የQQ ቡድን ቁጥሩ ወደ ቅንጥብ ሰሌዳው ተቀድቷል።</string>
-  <string name="share_app">[Autox.js] አውርድ አድራሻ፡ https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] አውርድ አድራሻ፡ https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">ተንሳፋፊ መስኮት</string>
   <string name="text_error_report">የስህተት ሪፖርት</string>
   <string name="text_press_again_to_exit">ከፕሮግራሙ ለመውጣት እንደገና ይጫኑ</string>

@@ -1,14 +1,14 @@
 # Change Log
 autoxjs 整个项目的一些更新日志,双版本号为稳定版，单版本号为激进版本。
 
-## [Unreleased](https://github.com/kkevsekk1/AutoX/compare/6.3.5...HEAD) 未发布
+## [Unreleased](https://github.com/openautojs/openautojs/compare/6.3.5...HEAD) 未发布
 
 ## [6.3.6] - 2023-1-8
 
 @gucong3000 调整如下内容
 1.将console打印Error对象时的行为，调整为与Chrome和Node.js等平台保持一致，打印堆栈信息。
 
-[6.3.6]:https://github.com/kkevsekk1/AutoX/compare/6.3.5...6.3.6
+[6.3.6]:https://github.com/openautojs/openautojs/compare/6.3.5...6.3.6
 
 下载地址： \
   http://autoxoss.autoxjs.com/autoxjs/6.3.6/app-v6-arm64-v8a-release-unsigned-signed.apk \
@@ -23,7 +23,7 @@ autoxjs 整个项目的一些更新日志,双版本号为稳定版，单版本�
 1. 修复 PC端日志输出先后顺序有问题
 2. 其他js等实例脚本问题
 
-[6.3.5]:https://github.com/kkevsekk1/AutoX/compare/6.3.4...6.3.5
+[6.3.5]:https://github.com/openautojs/openautojs/compare/6.3.4...6.3.5
 
  下载地址： \
   http://autoxoss.autoxjs.com/autoxjs/6.3.5/app-v6-arm64-v8a-release-unsigned-signed.apk \
@@ -43,7 +43,7 @@ autoxjs 整个项目的一些更新日志,双版本号为稳定版，单版本�
   http://autoxoss.autoxjs.com/autoxjs/6.3.4/app-v6-armeabi-v7a-release-unsigned-signed.apk \
   http://autoxoss.autoxjs.com/autoxjs/6.3.4/app-v6-universal-release-unsigned-signed.apk 
 
-[6.3.4]:https://github.com/kkevsekk1/AutoX/compare/6.2.3...6.3.4
+[6.3.4]:https://github.com/openautojs/openautojs/compare/6.2.3...6.3.4
 
 
 ## [6.3.3] - 2022-8-25
@@ -59,7 +59,7 @@ autoxjs 整个项目的一些更新日志,双版本号为稳定版，单版本�
   http://autoxoss.autoxjs.com/autoxjs/6.3.3/app-v6-armeabi-v7a-release-unsigned-signed.apk \
   http://autoxoss.autoxjs.com/autoxjs/6.3.3/app-v6-universal-release-unsigned-signed.apk 
 
-[6.3.3]:https://github.com/kkevsekk1/AutoX/compare/6.2.9...6.3.3
+[6.3.3]:https://github.com/openautojs/openautojs/compare/6.2.9...6.3.3
 
 
 ## [6.2.9] - 2022-8-22
@@ -72,10 +72,10 @@ autoxjs 整个项目的一些更新日志,双版本号为稳定版，单版本�
 3. [连接电脑增加断线重连和心跳检测（需要更新VSCODE Autox 插件到 1.109.0 以上才会启用）](https://github.com/wilinz/AutoX/commit/a703977fcfdeda32b0d40424f7f3933f0a274a3c)
 4. [添加TessractOCR及例子](https://github.com/wilinz/AutoX/commit/1ab2345d01860b134b622d27cb3f8b7a9a14bbee)
 5. [远程项目临时文件夹改回MD5命名](https://github.com/wilinz/AutoX/commit/a654bdb727fb14997f6c696a077a8c094d3175ab)
-6. [修复 PFile.copyAssetDir() 空目录报错（打包后的APK闪退问题）](https://github.com/wilinz/AutoX/commit/0f6a7945729871fae160ad81d61c964ffb018e92) https://github.com/kkevsekk1/AutoX/issues/411
+6. [修复 PFile.copyAssetDir() 空目录报错（打包后的APK闪退问题）](https://github.com/wilinz/AutoX/commit/0f6a7945729871fae160ad81d61c964ffb018e92) https://github.com/openautojs/openautojs/issues/411
 7. [修复打包Bug & 优化](https://github.com/wilinz/AutoX/commit/81703d29b775ee11cbbe6e05a0fea2f85560f943)
 
-[6.2.9]:https://github.com/kkevsekk1/AutoX/compare/6.2.8...6.2.9
+[6.2.9]:https://github.com/openautojs/openautojs/compare/6.2.8...6.2.9
 
 ## [6.2.8] - 2022-8-20
 
@@ -85,10 +85,10 @@ autoxjs 整个项目的一些更新日志,双版本号为稳定版，单版本�
 3. [修复示例代码"表格控件-内置图标查看器"打包后不能正常运行BUG](https://github.com/wilinz/AutoX/commit/d72ef148cc6c258e33570125f54c756f5dfa1a3f)
 4. [修复打包的一些BUG（自定义签名BUG未修复，预计下版本修复）](https://github.com/wilinz/AutoX/commit/37762e5b4d9c6481d532094c1494c6960207b0a7)
 5. [优化ocr](https://github.com/wilinz/AutoX/commit/2724484a065d70a747653e3f1b4960e11319e239)
-6. [解决 Web注入 invoke 不指定回调方法就报错的bug](https://github.com/kkevsekk1/AutoX/commit/b7778cef2b5f0d0d875a4bf9c016092527668458)
+6. [解决 Web注入 invoke 不指定回调方法就报错的bug](https://github.com/openautojs/openautojs/commit/b7778cef2b5f0d0d875a4bf9c016092527668458)
 @xxxxue 修复示例中的一些问题
 
-[6.2.8]:https://github.com/kkevsekk1/AutoX/compare/6.2.7...6.2.8
+[6.2.8]:https://github.com/openautojs/openautojs/compare/6.2.7...6.2.8
 
 ## [6.2.7] - 2022-8-15
 
@@ -99,12 +99,12 @@ autoxjs 整个项目的一些更新日志,双版本号为稳定版，单版本�
 3. [修复OCR BUG](https://github.com/wilinz/AutoX/commit/58f763f061f121c3eb47505a70eb8ee0fd111ebb)
 4. [修复打包BUG，打包编辑框自动填充BUG](https://github.com/wilinz/AutoX/commit/8031a8e9cc0e4d70429e7f067f15876f1d789b7e)
 
-[6.2.7]:https://github.com/kkevsekk1/AutoX/compare/6.2.6...6.2.7
+[6.2.7]:https://github.com/openautojs/openautojs/compare/6.2.6...6.2.7
 
 ## [6.2.6] - 2022-8-14
 
 @wilinz 增加如下功能
-1. [修复](https://github.com/wilinz/AutoX/commit/3d04d498d4c5ebdae60a41c02abd3dd43c374040) https://github.com/kkevsekk1/AutoX/issues/392 [root权限直接打开无障碍](https://github.com/wilinz/AutoX/commit/3d04d498d4c5ebdae60a41c02abd3dd43c374040)
+1. [修复](https://github.com/wilinz/AutoX/commit/3d04d498d4c5ebdae60a41c02abd3dd43c374040) https://github.com/openautojs/openautojs/issues/392 [root权限直接打开无障碍](https://github.com/wilinz/AutoX/commit/3d04d498d4c5ebdae60a41c02abd3dd43c374040)
 2. [文档页面工具栏添加在浏览器打开按钮，侧滑菜单添加切换定时任务调度器按钮](https://github.com/wilinz/AutoX/commit/991de7fb687c561c0ad9064dae3ca192bb541c22) 
 3. [修复定时任务无效问题](https://github.com/wilinz/AutoX/commit/362a1f31bc8df682f138d9d86c0d9229c8fb241f)
 4. [修复打包BUG，以及打包后的App闪退的问题](https://github.com/wilinz/AutoX/commit/2a1e5c0edb2d70ce88a07cc5f5ba608c1e4e7b8c)
@@ -113,11 +113,11 @@ autoxjs 整个项目的一些更新日志,双版本号为稳定版，单版本�
 7. [优化topAppBar弹出菜单, 确保点击后关闭菜单](https://github.com/wilinz/AutoX/commit/3fdd4a239b12e1c5518c5893ff9b8d65060a20d2)
 8. 修复连接vscode URL解析BUG，增加扫码连接后记住扫码结果功能
 
-[6.2.6]:https://github.com/kkevsekk1/AutoX/compare/6.2.5...6.2.6
+[6.2.6]:https://github.com/openautojs/openautojs/compare/6.2.5...6.2.6
 
 ## [6.2.5] -- 2022-8-13
 
-[6.2.5]:https://github.com/kkevsekk1/AutoX/compare/6.2.3...6.2.5
+[6.2.5]:https://github.com/openautojs/openautojs/compare/6.2.3...6.2.5
 
 @wilinz 增加如下功能
 
@@ -131,7 +131,7 @@ autoxjs 整个项目的一些更新日志,双版本号为稳定版，单版本�
 8. [修复打包的APK不支持armeabi-v7a的BUG，优化模板apk，与Autox.js共享二进制库和Assets, 以减少Autox.js Apk 大小](https://github.com/wilinz/AutoX/commit/8b6776cff8b0fca4be4a52719b7d7d07c0a058f3) 
 9. [修改包名使Autox.js可以和Auto.js共存](https://github.com/wilinz/AutoX/commit/8b6776cff8b0fca4be4a52719b7d7d07c0a058f3)
 10. [优化检查更新](https://github.com/wilinz/AutoX/commit/629e8d90317b12ac7109ea808689c8072dd8cd83)
-11. [修复crypto模块BUG](https://github.com/kkevsekk1/AutoX/pull/391/commits/28913396430f0189a3cd0334382f44178bba55de)
+11. [修复crypto模块BUG](https://github.com/openautojs/openautojs/pull/391/commits/28913396430f0189a3cd0334382f44178bba55de)
 
 
 

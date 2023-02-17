@@ -183,7 +183,7 @@ open class EWebView : FrameLayout, SwipeRefreshLayout.OnRefreshListener,
             setNeedInitialFocus(true);
             saveFormData = true;
             cacheMode = android.webkit.WebSettings.LOAD_CACHE_ELSE_NETWORK //使用缓存
-            setAppCacheEnabled(false);
+//            setAppCacheEnabled(false);
             domStorageEnabled = true
             databaseEnabled = true   //开启 database storage API 功能
             pluginState = android.webkit.WebSettings.PluginState.ON

@@ -37,7 +37,7 @@
   <string name="github">Código fonte do software</string>
   <string name="text_already_copy_to_clip">Copiouse no portapapeis</string>
   <string name="text_qq_already_copy_to_clip">O número do grupo QQ foi copiado no portapapeis</string>
-  <string name="share_app">[Autox.js] Dirección de descarga: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Dirección de descarga: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Fiestra flotante</string>
   <string name="text_error_report">Informe de erros</string>
   <string name="text_press_again_to_exit">Prema de novo para saír do programa</string>

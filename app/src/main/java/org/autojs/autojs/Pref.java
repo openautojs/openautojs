@@ -133,7 +133,7 @@ public class Pref {
 
     public static String getDocumentationUrl() {
 //        String docSource = def().getString(getString(R.string.key_documentation_source), null);
-        return "http://doc.autoxjs.com/";
+        return "https://openautojs.github.io";
     }
 
     public static boolean isFloatingMenuShown() {

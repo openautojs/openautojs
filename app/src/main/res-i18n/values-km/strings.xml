@@ -37,7 +37,7 @@
   <string name="github">កូដប្រភពកម្មវិធី</string>
   <string name="text_already_copy_to_clip">បានចម្លងទៅក្ដារតម្បៀតខ្ទាស់</string>
   <string name="text_qq_already_copy_to_clip">លេខក្រុម QQ ត្រូវបានចម្លងទៅក្ដារតម្បៀតខ្ទាស់</string>
-  <string name="share_app">[Autox.js] អាសយដ្ឋានទាញយក៖ https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] អាសយដ្ឋានទាញយក៖ https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">បង្អួចអណ្តែត</string>
   <string name="text_error_report">របាយការណ៍កំហុស</string>
   <string name="text_press_again_to_exit">ចុចម្តងទៀតដើម្បីចេញពីកម្មវិធី</string>

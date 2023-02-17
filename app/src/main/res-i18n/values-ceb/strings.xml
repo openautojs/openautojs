@@ -37,7 +37,7 @@
   <string name="github">Software source code</string>
   <string name="text_already_copy_to_clip">Gikopya sa clipboard</string>
   <string name="text_qq_already_copy_to_clip">Ang numero sa grupo sa QQ gikopya sa clipboard</string>
-  <string name="share_app">[Autox.js] Pag-download nga adres: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Pag-download nga adres: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Naglutaw nga bintana</string>
   <string name="text_error_report">Report sa sayop</string>
   <string name="text_press_again_to_exit">Pindota pag-usab aron makagawas sa programa</string>

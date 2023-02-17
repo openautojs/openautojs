@@ -37,7 +37,7 @@
   <string name="github">Software source code</string>
   <string name="text_already_copy_to_clip">Copied to clipboard</string>
   <string name="text_qq_already_copy_to_clip">The QQ group number has been copied to the clipboard</string>
-  <string name="share_app">[Autox.js] Download address: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Download address: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Floating window</string>
   <string name="text_error_report">Error report</string>
   <string name="text_press_again_to_exit">Press again to exit the program</string>

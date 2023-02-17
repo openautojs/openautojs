@@ -37,7 +37,7 @@
   <string name="github">Изходен код на софтуер</string>
   <string name="text_already_copy_to_clip">Копирани в клипборда</string>
   <string name="text_qq_already_copy_to_clip">Номерът на групата QQ е копиран в клипборда</string>
-  <string name="share_app">[Autox.js] Адрес за изтегляне: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Адрес за изтегляне: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Плаващ прозорец</string>
   <string name="text_error_report">Доклад за грешка</string>
   <string name="text_press_again_to_exit">Натиснете отново, за да излезете от програмата</string>

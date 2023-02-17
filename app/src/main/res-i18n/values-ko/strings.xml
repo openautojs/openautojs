@@ -37,7 +37,7 @@
   <string name="github">소프트웨어 소스 코드</string>
   <string name="text_already_copy_to_clip">클립보드에 복사</string>
   <string name="text_qq_already_copy_to_clip">QQ 그룹 번호가 클립보드에 복사되었습니다.</string>
-  <string name="share_app">[Autox.js] 다운로드 주소: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] 다운로드 주소: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">플로팅 윈도우</string>
   <string name="text_error_report">오류 보고서</string>
   <string name="text_press_again_to_exit">프로그램을 종료하려면 다시 누르십시오.</string>

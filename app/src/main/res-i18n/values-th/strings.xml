@@ -37,7 +37,7 @@
   <string name="github">รหัสที่มาของซอฟต์แวร์</string>
   <string name="text_already_copy_to_clip">คัดลอกไปยังคลิปบอร์ดแล้ว</string>
   <string name="text_qq_already_copy_to_clip">คัดลอกหมายเลขกลุ่ม QQ ไปยังคลิปบอร์ดแล้ว</string>
-  <string name="share_app">[Autox.js] ดาวน์โหลดที่อยู่: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] ดาวน์โหลดที่อยู่: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">หน้าต่างลอยน้ำ</string>
   <string name="text_error_report">รายงานข้อผิดพลาด</string>
   <string name="text_press_again_to_exit">กดอีกครั้งเพื่อออกจากโปรแกรม</string>

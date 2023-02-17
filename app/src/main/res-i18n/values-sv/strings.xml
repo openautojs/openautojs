@@ -37,7 +37,7 @@
   <string name="github">Programvarans källkod</string>
   <string name="text_already_copy_to_clip">Kopieras till urklipp</string>
   <string name="text_qq_already_copy_to_clip">QQ-gruppnumret har kopierats till urklippet</string>
-  <string name="share_app">[Autox.js] Nedladdningsadress: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Nedladdningsadress: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Flytande fönster</string>
   <string name="text_error_report">Felrapport</string>
   <string name="text_press_again_to_exit">Tryck igen för att avsluta programmet</string>

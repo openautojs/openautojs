@@ -37,7 +37,7 @@
   <string name="github">کد منبع نرم افزار</string>
   <string name="text_already_copy_to_clip">در کلیپ بورد کپی شد</string>
   <string name="text_qq_already_copy_to_clip">شماره گروه QQ در کلیپ بورد کپی شده است</string>
-  <string name="share_app">[Autox.js] آدرس دانلود: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] آدرس دانلود: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">پنجره شناور</string>
   <string name="text_error_report">گزارش خطا</string>
   <string name="text_press_again_to_exit">دوباره فشار دهید تا از برنامه خارج شوید</string>

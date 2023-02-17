@@ -37,7 +37,7 @@
   <string name="github">Исходный код программы</string>
   <string name="text_already_copy_to_clip">Скопировано в буфер обмена</string>
   <string name="text_qq_already_copy_to_clip">Номер группы QQ скопирован в буфер обмена.</string>
-  <string name="share_app">[Autox.js] Адрес загрузки: https://github.com/kkevsekk1/AutoX/releases</string>
+  <string name="share_app">[Autox.js] Адрес загрузки: https://github.com/openautojs/openautojs/releases</string>
   <string name="text_floating_window">Плавающее окно</string>
   <string name="text_error_report">Сообщение об ошибке</string>
   <string name="text_press_again_to_exit">Нажмите еще раз, чтобы выйти из программы</string>
