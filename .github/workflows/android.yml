@@ -11,53 +11,56 @@ jobs:
       - name: Set output
         id: vars
         run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
       - name: checkout
         id: check
         uses: actions/checkout@v1
+
       - name: set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
       - name: Build inrt template
         run: |
           chmod 777 ./gradlew
           ./gradlew inrt:assembleTemplate
           ls
-      - uses: Tlaster/android-sign@v1.2.2
-        name: Sign inrt APK
-        with:
-          releaseDirectory: |
-            inrt/build/outputs/apk/template/release
-          signingKeyBase64: ${{ secrets.ISIGNING_KEY }}
-          output: build/inrt/signed
-          alias: ${{ secrets.IALIAS }}
-          keyStorePassword: ${{ secrets.IKEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.IKEY_PASSWORD }}
+
+      - name: Key base64 to file
+          uses: timheuer/base64-to-file@v1.2
+          with:
+            fileName: 'android_key.jks'
+            fileDir: '/tmp/.android_key/'
+            encodedString: ${{ secrets.ANDROID_KEY_BASE64 }}
+
       - name: Build App
         run: |
-          ls  build/inrt/signed
-          pwd
-          mv  build/inrt/signed/*.apk  app/src/main/assets/template.apk
+          ls  inrt/build/outputs/apk/template/release
+          mv  inrt/build/outputs/apk/template/release/*.apk  app/src/main/assets/template.apk
           ls  app/src/main/assets
           ./gradlew app:assembleCommon
-      - uses: Tlaster/android-sign@v1.2.2
-        name: Sign app APK
-        with:
-          releaseDirectory: |
-            app/build/outputs/apk/v6/release
-          signingKeyBase64: ${{ secrets.ASIGNING_KEY }}
-          output: build/app/signed
-          alias: ${{ secrets.AALIAS }}
-          keyStorePassword: ${{ secrets.AKEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.AKEY_PASSWORD }}
+
+      - name: Sign apk
+        env:
+          ANDROID_KS_PASS: ${{ secrets.ANDROID_KS_PASS }}
+        run: |
+          sudo apt install apksigner
+          for file in app/build/outputs/apk/common/release/*.apk; do
+                filename="${file##*/}"
+                echo "Signing ${filename}"
+                apksigner sign --v4-signing-enabled false --ks /tmp/.android_key/android_key.jks --ks-pass env:ANDROID_KS_PASS --ks-key-alias ${{ secrets.ANDROID_KEY_ALIAS }} ${file}
+              done
+
       - name: create-gh-release
         uses: taiki-e/create-gh-release-action@v1
         with:
           changelog: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: 'build/app/signed/**'
+          files: 'app/build/outputs/apk/common/release/*.apk'
