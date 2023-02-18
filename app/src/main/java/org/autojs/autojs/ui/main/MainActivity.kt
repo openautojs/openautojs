@@ -200,7 +200,11 @@ fun MainPage(
         drawerState = drawerState,
         drawerContent = {
             Surface(color = MaterialTheme.colorScheme.surface) {
-                DrawerPage(modifier = Modifier.width(width = width - 50.dp).padding(16.dp))
+                DrawerPage(
+                    modifier = Modifier
+                        .width(width = width - 50.dp)
+                        .padding(16.dp)
+                )
             }
         }) {
         Scaffold(
@@ -220,6 +224,9 @@ fun MainPage(
                                 contentDescription = stringResource(id = R.string.text_menu)
                             )
                         }
+                    },
+                    actions = {
+
                     }
                 )
 //            Surface(shadowElevation = 4.dp, color = MaterialTheme.colorScheme.surface) {
@@ -228,17 +235,17 @@ fun MainPage(
 //                        modifier = Modifier
 //                            .windowInsetsTopHeight(WindowInsets.statusBars)
 //                    )
-//                    TopBar(
-//                        currentPage = currentPage,
-//                        requestOpenDrawer = {
-//                            scope.launch { drawerState.open() }
-//                        },
-//                        onSearch = { keyword ->
-//                            scriptListFragment.explorerView.setFilter { it.name.contains(keyword) }
-//                        },
-//                        scriptListFragment = scriptListFragment,
-//                        webViewFragment = webViewFragment
-//                    )
+                TopBar(
+                    currentPage = currentPage,
+                    requestOpenDrawer = {
+                        scope.launch { drawerState.open() }
+                    },
+                    onSearch = { keyword ->
+                        scriptListFragment.explorerView.setFilter { it.name.contains(keyword) }
+                    },
+                    scriptListFragment = scriptListFragment,
+                    webViewFragment = webViewFragment
+                )
 //                }
 //            }
             },
@@ -382,8 +389,71 @@ private fun TopBar(
         mutableStateOf(false)
     }
     val context = LocalContext.current
-    TopAppBar(title = { Text(stringResource(id = R.string.app_name)) })
-//    TopAppBar() {
+    TopAppBar(
+        title = {
+            Text(text = stringResource(id = R.string.app_name))
+        },
+        navigationIcon = {
+            IconButton(onClick = {
+                requestOpenDrawer()
+            }) {
+                Icon(
+                    Icons.Default.Menu,
+                    contentDescription = stringResource(id = R.string.text_menu)
+                )
+            }
+        },
+        actions = {
+            IconButton(onClick = { LogActivityKt.start(context) }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_logcat),
+                    contentDescription = stringResource(id = R.string.text_logcat)
+                )
+            }
+            when (currentPage) {
+                0 -> {
+                    var expanded by remember {
+                        mutableStateOf(false)
+                    }
+                    Box() {
+                        IconButton(onClick = { expanded = true }) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = stringResource(id = R.string.desc_more)
+                            )
+                        }
+                        TopAppBarMenu(
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false },
+                            scriptListFragment = scriptListFragment
+                        )
+                    }
+                }
+                1 -> {
+                    IconButton(onClick = { AutoJs.getInstance().scriptEngineService.stopAll() }) {
+                        Icon(
+                            imageVector = Icons.Default.Clear,
+                            contentDescription = stringResource(id = R.string.desc_more)
+                        )
+                    }
+                }
+                2 -> {
+                    IconButton(onClick = {
+                        webViewFragment.swipeRefreshWebView.webView.url?.let {
+                            IntentUtil.browse(context, it)
+                        }
+                    }) {
+                        Icon(
+                            painterResource(id = R.drawable.ic_external_link),
+                            contentDescription = stringResource(id = R.string.text_browser_open)
+                        )
+                    }
+                }
+            }
+        }
+    )
+//    TopAppBar(title = { Text(stringResource(id = R.string.app_name)) })
+//    androidx.compose.material.TopAppBar() {
 //        CompositionLocalProvider(
 //            LocalContentAlpha provides ContentAlpha.high,
 //        ) {
@@ -395,7 +465,7 @@ private fun TopBar(
 //                    )
 //                }
 //
-//                ProvideTextStyle(value = MaterialTheme.typography.h6) {
+//                ProvideTextStyle(value = MaterialTheme.typography.headlineSmall) {
 //                    Text(
 //                        modifier = Modifier.weight(1f),
 //                        text = stringResource(id = R.string.app_name)

@@ -11,6 +11,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -18,8 +19,12 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.view.WindowCompat
 import com.stardust.autojs.core.console.ConsoleView
 import com.stardust.autojs.core.console.GlobalConsole
 import org.autojs.autojs.autojs.AutoJs
@@ -40,10 +45,13 @@ class LogActivityKt : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.statusBarColor = Color.Transparent.toArgb()
+        window.navigationBarColor = Color.Transparent.toArgb()
         setContent {
             AutoXJsTheme {
                 Surface(color = MaterialTheme.colorScheme.surface) {
-                    SetSystemUI()
+//                    SetSystemUI()
                     Content()
                 }
             }
@@ -102,7 +110,11 @@ class LogActivityKt : ComponentActivity() {
 
     @Composable
     private fun FloatingActionButton(consoleImpl: GlobalConsole) {
-        FloatingActionButton(onClick = { consoleImpl.clear() }) {
+        FloatingActionButton(
+            onClick = { consoleImpl.clear() },
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            shape = RoundedCornerShape(16.dp),
+        ) {
             Icon(
                 imageVector = Icons.Default.Clear,
                 contentDescription = stringResource(id = R.string.text_clear)

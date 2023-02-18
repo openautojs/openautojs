@@ -10,8 +10,11 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.view.*
 import android.widget.ImageView
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.core.graphics.drawable.toBitmapOrNull
 import androidx.core.net.toUri
+import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -43,6 +46,10 @@ open class ShortcutIconSelectActivity : BaseActivity() {
 
     @AfterViews
     fun setupViews() {
+        window.statusBarColor = Color.Transparent.toArgb()
+        window.navigationBarColor = Color.Transparent.toArgb()
+        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars =
+            true
         mPackageManager = packageManager
         setToolbarAsBack(getString(R.string.text_select_icon))
         setupApps()

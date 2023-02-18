@@ -81,7 +81,7 @@ fun TaskPage() {
                                             text = task.name,
                                             style = MaterialTheme.typography.titleMedium
                                         )
-                                        Text(text = task.desc ?: "")
+                                        Text(text = task.desc ?: "", style = MaterialTheme.typography.bodySmall)
                                     }
                                     IconButton(onClick = { task.cancel() }) {
                                         MyIcon(

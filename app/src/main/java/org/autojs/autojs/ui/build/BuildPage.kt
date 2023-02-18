@@ -143,13 +143,16 @@ private fun finish(
 @Composable
 private fun Fab(model: BuildViewModel) {
     val context = LocalContext.current
-    FloatingActionButton(shape = FloatingActionButtonDefaults.largeShape,
-    onClick = {
-        buildApk(model, context, model.keyStore)
-    }) {
+    FloatingActionButton(
+        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+        shape = RoundedCornerShape(16.dp),
+        onClick = {
+            buildApk(model, context, model.keyStore)
+        }) {
         Icon(
             imageVector = Icons.Default.Done,
-            contentDescription = stringResource(R.string.desc_done)
+            contentDescription = stringResource(R.string.desc_done),
+            tint = MaterialTheme.colorScheme.onSecondaryContainer
         )
     }
 }

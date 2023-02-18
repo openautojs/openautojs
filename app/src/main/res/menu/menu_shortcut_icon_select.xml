@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_select_image"
-        android:icon="@drawable/ic_insert_photo_white_48dp"
+        android:icon="@drawable/ic_image_black_48dp"
         android:title="@string/text_select_image"
         app:showAsAction="always"/>
 </menu>
