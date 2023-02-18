@@ -4,7 +4,7 @@ import java.io.File
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-android-extensions")
+//    id("kotlin-android-extensions")
     id("com.jakewharton.butterknife")
     id("kotlin-kapt")
 }
@@ -53,7 +53,7 @@ android {
         compose = true
     }
     viewBinding {
-        isEnabled = false
+        isEnabled = true
     }
     lint {
         abortOnError = false
@@ -64,8 +64,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0-rc01"
-        kotlinCompilerVersion = "1.6.20"
+        kotlinCompilerExtensionVersion = "1.3.1"
+        kotlinCompilerVersion = "1.7.10"
     }
     signingConfigs {
         if (propFile.exists()) {
@@ -150,6 +150,7 @@ android {
         exclude(group = "org.jetbrains", module = "annotations-java5")
 //        exclude(group = "com.atlassian.commonmark",) module = "commonmark"
         exclude(group = "com.github.atlassian.commonmark-java", module = "commonmark")
+//        exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
     }
 
     packagingOptions {
@@ -168,7 +169,7 @@ dependencies {
 
     implementation("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    val accompanist_version = "0.24.13-rc"
+    val accompanist_version = "0.28.0"
     implementation("com.google.accompanist:accompanist-permissions:0.24.13-rc")
     implementation("com.google.accompanist:accompanist-pager-indicators:$accompanist_version")
     implementation("com.google.accompanist:accompanist-pager:$accompanist_version")
@@ -315,4 +316,5 @@ dependencies {
     implementation("io.noties.markwon:core:4.6.2")
     implementation("androidx.viewpager2:viewpager2:1.1.0-beta01")
     implementation("io.coil-kt:coil-compose:2.0.0-rc03")
+    implementation("androidx.webkit:webkit:1.6.0")
 }

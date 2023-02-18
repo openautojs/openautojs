@@ -1,7 +1,7 @@
 package org.autojs.autojs.ui.compose.widget
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +23,7 @@ fun MySwipeRefresh(
     indicator: @Composable (state: SwipeRefreshState, refreshTrigger: Dp) -> Unit = { s, trigger ->
         SwipeRefreshIndicator(
             s, trigger,
-            contentColor = MaterialTheme.colors.primary
+            contentColor = MaterialTheme.colorScheme.primary
         )
     },
     clipIndicatorToPadding: Boolean = true,

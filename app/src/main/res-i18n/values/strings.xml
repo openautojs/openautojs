@@ -553,4 +553,7 @@
     <string name="text_reconnecting">正在重新连接</string>
     <string name="text_connecting">正在连接</string>
     <string name="text_handshake_failed">握手失败</string>
+
+    <string name="text_show" translatable="false">显示</string>
+    <string name="text_hide" translatable="false">隐藏</string>
 </resources>

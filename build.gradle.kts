@@ -4,7 +4,6 @@ initVersions(file("project-versions.json"))
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    val kotlin_version = "1.6.21"
 
     extra.apply {
         set("kotlin_version", kotlin_version)
@@ -25,9 +24,8 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.1")
-        classpath(kotlin("gradle-plugin", version = "$kotlin_version"))
+        classpath(kotlin("gradle-plugin", version = kotlin_version))
         classpath("com.jakewharton:butterknife-gradle-plugin:10.2.3")
-        classpath("org.codehaus.groovy:groovy-json:3.0.8")
     }
 }
 
@@ -38,7 +36,7 @@ allprojects {
         google()
         mavenCentral()
         maven("https://www.jitpack.io")
-        maven("https://120.25.164.233:8081/nexus/content/groups/public/")
+//        maven("https://120.25.164.233:8081/nexus/content/groups/public/")
         maven("https://maven.aliyun.com/repository/central")
         google { url = uri("https://maven.aliyun.com/repository/google") }
         mavenCentral { url = uri("https://maven.aliyun.com/repository/public") }

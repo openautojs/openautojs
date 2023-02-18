@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package org.autojs.autojs.ui.log
 
 import android.content.Context
@@ -9,7 +11,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
@@ -22,6 +24,7 @@ import com.stardust.autojs.core.console.ConsoleView
 import com.stardust.autojs.core.console.GlobalConsole
 import org.autojs.autojs.autojs.AutoJs
 import org.autojs.autojs.ui.compose.theme.AutoXJsTheme
+import org.autojs.autojs.ui.compose.theme.isLight
 import org.autojs.autojs.ui.compose.util.SetSystemUI
 import org.autojs.autojs.ui.widget.fillMaxSize
 import org.openautojs.autojs.R
@@ -39,7 +42,7 @@ class LogActivityKt : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AutoXJsTheme {
-                Surface(color = MaterialTheme.colors.surface) {
+                Surface(color = MaterialTheme.colorScheme.surface) {
                     SetSystemUI()
                     Content()
                 }
@@ -69,7 +72,7 @@ class LogActivityKt : ComponentActivity() {
         it: PaddingValues,
         consoleImpl: GlobalConsole
     ) {
-        val isLight = MaterialTheme.colors.isLight
+        val isLight = MaterialTheme.colorScheme.isLight
         AndroidView(
             modifier = Modifier.padding(it),
             factory = { context ->

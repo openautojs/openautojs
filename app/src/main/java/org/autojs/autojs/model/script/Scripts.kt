@@ -46,11 +46,11 @@ object Scripts {
 
     private val BROADCAST_SENDER_SCRIPT_EXECUTION_LISTENER = object : SimpleScriptExecutionListener() {
 
-        override fun onSuccess(execution: ScriptExecution, result: Any?) {
+        override fun onSuccess(execution: ScriptExecution?, result: Any?) {
             GlobalAppContext.get().sendBroadcast(Intent(ACTION_ON_EXECUTION_FINISHED))
         }
 
-        override fun onException(execution: ScriptExecution, e: Throwable) {
+        override fun onException(execution: ScriptExecution?, e: Throwable?) {
             val rhinoException = getRhinoException(e)
             var line = -1
             var col = 0
@@ -64,7 +64,7 @@ object Scripts {
                         .putExtra(EXTRA_EXCEPTION_COLUMN_NUMBER, col))
             } else {
                 GlobalAppContext.get().sendBroadcast(Intent(ACTION_ON_EXECUTION_FINISHED)
-                        .putExtra(EXTRA_EXCEPTION_MESSAGE, e.message)
+                        .putExtra(EXTRA_EXCEPTION_MESSAGE, e?.message)
                         .putExtra(EXTRA_EXCEPTION_LINE_NUMBER, line)
                         .putExtra(EXTRA_EXCEPTION_COLUMN_NUMBER, col))
             }

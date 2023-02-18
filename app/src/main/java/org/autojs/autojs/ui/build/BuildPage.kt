@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package org.autojs.autojs.ui.build
 
 import android.app.Activity
@@ -18,10 +20,12 @@ import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -38,6 +42,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.afollestad.materialdialogs.DialogAction
@@ -113,8 +119,8 @@ fun BuildPage(model: BuildViewModel = viewModel()) {
                 .padding(it)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(6.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             FileCard(model)
             ConfigCard(model)
@@ -137,7 +143,8 @@ private fun finish(
 @Composable
 private fun Fab(model: BuildViewModel) {
     val context = LocalContext.current
-    FloatingActionButton(onClick = {
+    FloatingActionButton(shape = FloatingActionButtonDefaults.largeShape,
+    onClick = {
         buildApk(model, context, model.keyStore)
     }) {
         Icon(
@@ -214,7 +221,7 @@ private fun PackagingOptionCard(
     model: BuildViewModel
 ) {
     val context = LocalContext.current
-    Card() {
+    ElevatedCard() {
         Column(
             Modifier
                 .fillMaxSize()
@@ -279,7 +286,7 @@ private fun SignatureCard(
 ) {
     val context = LocalContext.current
 
-    Card() {
+    ElevatedCard() {
         Column(
             Modifier
                 .fillMaxSize()
@@ -311,7 +318,7 @@ private fun RunConfigCard(model: BuildViewModel) {
         }
     )
 
-    Card() {
+    ElevatedCard() {
         Column(
             Modifier
                 .fillMaxSize()
@@ -386,7 +393,7 @@ private fun RunConfigCard(model: BuildViewModel) {
                     painter = painterResource(id = R.drawable.ic_add_white_48dp),
                     contentDescription = stringResource(R.string.apk_icon),
                     modifier = modifier,
-                    tint = MaterialTheme.colors.primary
+                    tint = MaterialTheme.colorScheme.primary
                 )
             } else {
                 Image(
@@ -416,7 +423,7 @@ private fun ConfigCard(model: BuildViewModel) {
         }
     )
 
-    Card() {
+    ElevatedCard() {
         Column(
             Modifier
                 .fillMaxSize()
@@ -466,7 +473,7 @@ private fun ConfigCard(model: BuildViewModel) {
                                 painter = painterResource(id = R.drawable.ic_add_white_48dp),
                                 contentDescription = stringResource(R.string.apk_icon),
                                 modifier = modifier,
-                                tint = MaterialTheme.colors.primary
+                                tint = MaterialTheme.colorScheme.primary
                             )
                         } else {
                             Image(
@@ -485,7 +492,7 @@ private fun ConfigCard(model: BuildViewModel) {
 @Composable
 private fun FileCard(model: BuildViewModel) {
     val context = LocalContext.current
-    Card() {
+    ElevatedCard() {
         Column(
             Modifier
                 .fillMaxSize()
@@ -570,7 +577,7 @@ fun NextActionTextField(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape =
         MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
-    colors: TextFieldColors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent)
+    colors: TextFieldColors = TextFieldDefaults.textFieldColors(containerColor = Color.Transparent)
 ) {
     val focusManager = LocalFocusManager.current
     MyTextField(
@@ -620,8 +627,8 @@ fun MyTextField(
     shape: Shape =
         MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
     colors: TextFieldColors = TextFieldDefaults.textFieldColors(
-        backgroundColor = Color.Transparent,
-        textColor = MaterialTheme.colors.onSurface
+        containerColor = Color.Transparent,
+        textColor = MaterialTheme.colorScheme.onSurface
     )
 ) {
     TextField(
@@ -854,23 +861,15 @@ fun AskSaveDialog(
     onExitClick: () -> Unit
 ) {
     if (isShowDialog) {
-        AlertDialog(
+        Dialog(
             onDismissRequest = onDismissRequest,
-            title = {
-                Text(
-                    text = stringResource(id = R.string.text_alert),
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-            },
-            text = {
-                Text(
-                    text = stringResource(id = R.string.edit_exit_without_save_warn),
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-            },
-            buttons = {
+            properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
+        ) {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(8.dp)
+            ) {
                 Column {
                     Divider()
                     TextButton(onClick = onSaveClick, modifier = Modifier.fillMaxWidth()) {
@@ -895,7 +894,7 @@ fun AskSaveDialog(
                     }
                 }
             }
-        )
+        }
     }
 }
 
@@ -907,38 +906,45 @@ fun SaveDialog(
     onSaveClick: () -> Unit
 ) {
     if (isShowDialog) {
-        AlertDialog(
+        Dialog(
             onDismissRequest = onDismissRequest,
-            title = {
-                Text(
-                    text = stringResource(id = R.string.text_save),
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-            },
-            text = {
-                Text(
-                    text = stringResource(id = R.string.text_select_save_mode),
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-            },
-            buttons = {
+            properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
+        ) {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(8.dp)
+            ) {
                 Column(modifier = Modifier.fillMaxWidth()) {
-                    Divider()
-                    TextButton(onClick = onSaveClick, modifier = Modifier.fillMaxWidth()) {
-                        Text(text = stringResource(id = R.string.text_save))
-                    }
-                    Divider()
-                    TextButton(onClick = onSaveAsProjectClick, modifier = Modifier.fillMaxWidth()) {
-                        Text(text = stringResource(id = R.string.text_save_as_project))
-                    }
-                    Divider()
-                    TextButton(onClick = onDismissRequest, modifier = Modifier.fillMaxWidth()) {
-                        Text(text = stringResource(id = R.string.text_cancel))
+                    Text(
+                        text = stringResource(id = R.string.text_save),
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = stringResource(id = R.string.text_select_save_mode),
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Divider()
+                        TextButton(onClick = onSaveClick, modifier = Modifier.fillMaxWidth()) {
+                            Text(text = stringResource(id = R.string.text_save))
+                        }
+                        Divider()
+                        TextButton(
+                            onClick = onSaveAsProjectClick,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(text = stringResource(id = R.string.text_save_as_project))
+                        }
+                        Divider()
+                        TextButton(onClick = onDismissRequest, modifier = Modifier.fillMaxWidth()) {
+                            Text(text = stringResource(id = R.string.text_cancel))
+                        }
                     }
                 }
             }
-        )
+        }
     }
 }

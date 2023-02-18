@@ -1,150 +1,136 @@
-package org.autojs.autojs.ui.main.task;
+package org.autojs.autojs.ui.main.task
 
-import android.content.Context;
-
-import com.bignerdranch.expandablerecyclerview.model.Parent;
-import com.stardust.autojs.execution.ScriptExecution;
-
-import org.openautojs.autojs.R;
-import org.autojs.autojs.autojs.AutoJs;
-import org.autojs.autojs.timing.IntentTask;
-import org.autojs.autojs.timing.TimedTask;
-import org.autojs.autojs.timing.TimedTaskManager;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import android.content.Context
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import com.bignerdranch.expandablerecyclerview.model.Parent
+import com.stardust.autojs.execution.ScriptExecution
+import org.autojs.autojs.autojs.AutoJs
+import org.autojs.autojs.timing.IntentTask
+import org.autojs.autojs.timing.TimedTask
+import org.autojs.autojs.timing.TimedTaskManager.allIntentTasksAsList
+import org.autojs.autojs.timing.TimedTaskManager.allTasksAsList
+import org.autojs.autojs.ui.main.task.Task.PendingTask
+import org.autojs.autojs.ui.main.task.Task.RunningTask
+import org.openautojs.autojs.R
 
 /**
  * Created by Stardust on 2017/11/28.
  */
+abstract class TaskGroup protected constructor(val title: String) : Parent<Task> {
+    protected var mTasks = mutableStateListOf<Task>()
 
-public abstract class TaskGroup implements Parent<Task> {
-
-    protected List<Task> mTasks = new ArrayList<>();
-    private String mTitle;
-
-    protected TaskGroup(String title) {
-        mTitle = title;
+    override fun getChildList(): SnapshotStateList<Task> {
+        return mTasks
     }
 
-
-    @Override
-    public List<Task> getChildList() {
-        return mTasks;
+    override fun isInitiallyExpanded(): Boolean {
+        return true
     }
 
-    @Override
-    public boolean isInitiallyExpanded() {
-        return true;
-    }
-
-    public String getTitle() {
-        return mTitle;
-    }
-
-    public abstract void refresh();
-
-    public static class PendingTaskGroup extends TaskGroup {
-
-        public PendingTaskGroup(Context context) {
-            super(context.getString(R.string.text_timed_task));
-            refresh();
+    abstract fun refresh()
+    class PendingTaskGroup(context: Context) :
+        TaskGroup(context.getString(R.string.text_timed_task)) {
+        init {
+            refresh()
         }
 
-        @Override
-        public void refresh() {
-            mTasks.clear();
-            for (TimedTask timedTask : TimedTaskManager.INSTANCE.getAllTasksAsList()) {
-                mTasks.add(new Task.PendingTask(timedTask));
+        override fun refresh() {
+            mTasks.clear()
+            for (timedTask in allTasksAsList) {
+                mTasks.add(PendingTask(timedTask))
             }
-            for (IntentTask intentTask : TimedTaskManager.INSTANCE.getAllIntentTasksAsList()) {
-                mTasks.add(new Task.PendingTask(intentTask));
+            for (intentTask in allIntentTasksAsList) {
+                mTasks.add(PendingTask(intentTask))
             }
         }
 
-        public int addTask(Object task) {
-            int pos = mTasks.size();
-            if (task instanceof TimedTask) {
-                mTasks.add(new Task.PendingTask((TimedTask) task));
-            } else if (task instanceof IntentTask) {
-                mTasks.add(new Task.PendingTask((IntentTask) task));
-            } else {
-                throw new IllegalArgumentException("task = " + task);
+        fun addTask(task: Any): Int {
+            val pos = mTasks.size
+            when (task) {
+                is TimedTask -> {
+                    mTasks.add(PendingTask(task))
+                }
+                is IntentTask -> {
+                    mTasks.add(PendingTask(task))
+                }
+                else -> {
+                    throw IllegalArgumentException("task = $task")
+                }
             }
-            return pos;
+            return pos
         }
 
-        public int removeTask(Object data) {
-            int i = indexOf(data);
-            if (i >= 0)
-                mTasks.remove(i);
-            return i;
+        fun removeTask(data: Any): Int {
+            val i = indexOf(data)
+            if (i >= 0) mTasks.removeAt(i)
+            return i
         }
 
-        private int indexOf(Object data) {
-            for (int i = 0; i < mTasks.size(); i++) {
-                Task.PendingTask task = (Task.PendingTask) mTasks.get(i);
+        private fun indexOf(data: Any): Int {
+            for (i in mTasks.indices) {
+                val task = mTasks[i] as PendingTask
                 if (task.taskEquals(data)) {
-                    return i;
+                    return i
                 }
             }
-            return -1;
+            return -1
         }
 
-
-        public int updateTask(Object task) {
-            int i = indexOf(task);
+        fun updateTask(task: Any): Int {
+            val i = indexOf(task)
             if (i >= 0) {
-                if (task instanceof TimedTask) {
-                    ((Task.PendingTask) mTasks.get(i)).setTimedTask((TimedTask) task);
-                } else if (task instanceof IntentTask) {
-                    ((Task.PendingTask) mTasks.get(i)).setIntentTask((IntentTask) task);
-                } else {
-                    throw new IllegalArgumentException("task = " + task);
+                when (task) {
+                    is TimedTask -> {
+                        (mTasks[i] as PendingTask).timedTask = task
+                    }
+                    is IntentTask -> {
+                        (mTasks[i] as PendingTask).setIntentTask(task)
+                    }
+                    else -> {
+                        throw IllegalArgumentException("task = $task")
+                    }
                 }
             }
-            return i;
+            return i
         }
     }
 
-    public static class RunningTaskGroup extends TaskGroup {
-
-        public RunningTaskGroup(Context context) {
-            super(context.getString(R.string.text_running_task));
-            refresh();
+    class RunningTaskGroup(context: Context) :
+        TaskGroup(context.getString(R.string.text_running_task)) {
+        init {
+            refresh()
         }
 
-        @Override
-        public void refresh() {
-            Collection<ScriptExecution> executions = AutoJs.getInstance().getScriptEngineService().getScriptExecutions();
-            mTasks.clear();
-            for (ScriptExecution execution : executions) {
-                mTasks.add(new Task.RunningTask(execution));
+        override fun refresh() {
+            val executions = AutoJs.getInstance().scriptEngineService.scriptExecutions
+            mTasks.clear()
+            for (execution in executions) {
+                mTasks.add(RunningTask(execution))
             }
         }
 
-        public int addTask(ScriptExecution engine) {
-            int pos = mTasks.size();
-            mTasks.add(new Task.RunningTask(engine));
-            return pos;
+        fun addTask(engine: ScriptExecution): Int {
+            val pos = mTasks.size
+            mTasks.add(RunningTask(engine))
+            return pos
         }
 
-        public int removeTask(ScriptExecution engine) {
-            int i = indexOf(engine);
+        fun removeTask(engine: ScriptExecution): Int {
+            val i = indexOf(engine)
             if (i >= 0) {
-                mTasks.remove(i);
+                mTasks.removeAt(i)
             }
-            return i;
+            return i
         }
 
-        public int indexOf(ScriptExecution engine) {
-            for (int i = 0; i < mTasks.size(); i++) {
-                if (((Task.RunningTask) mTasks.get(i)).getScriptExecution().equals(engine)) {
-                    return i;
+        fun indexOf(engine: ScriptExecution): Int {
+            for (i in mTasks.indices) {
+                if ((mTasks[i] as RunningTask).scriptExecution == engine) {
+                    return i
                 }
             }
-            return -1;
+            return -1
         }
     }
 }

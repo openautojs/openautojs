@@ -6,11 +6,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +29,7 @@ fun SearchBox(
 ) {
     Surface(
         shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colors.primary),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
         modifier = modifier
     ) {
         BasicTextField(
@@ -48,7 +46,7 @@ fun SearchBox(
                     }
                 }
             },
-            cursorBrush = SolidColor(MaterialTheme.colors.primary),
+            cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
             modifier = Modifier.padding(8.dp),
             singleLine = singleLine,
             keyboardOptions = keyboardOptions,
@@ -82,11 +80,11 @@ fun SearchBox2(
                 }
             }
         },
-        cursorBrush = SolidColor(MaterialTheme.colors.onPrimary),
+        cursorBrush = SolidColor(MaterialTheme.colorScheme.onPrimary),
         modifier = modifier.padding(8.dp),
         singleLine = singleLine,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
-        textStyle= TextStyle(color = MaterialTheme.colors.onPrimary)
+        textStyle= TextStyle(color = MaterialTheme.colorScheme.onPrimary)
     )
 }

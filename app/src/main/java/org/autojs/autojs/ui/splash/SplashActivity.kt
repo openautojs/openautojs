@@ -8,8 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +25,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.autojs.autojs.ui.compose.theme.AutoXJsTheme
 import org.autojs.autojs.ui.main.MainActivity
 import org.openautojs.autojs.R
 
@@ -46,60 +46,63 @@ class SplashActivity : ComponentActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-         if (hasFocus) {
-             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                 window.attributes = window.attributes.apply {
-                     layoutInDisplayCutoutMode =
-                         WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-                 }
-             }
+        if (hasFocus) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                window.attributes = window.attributes.apply {
+                    layoutInDisplayCutoutMode =
+                        WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+                }
+            }
 
-             WindowCompat.setDecorFitsSystemWindows(window, false)
-             val controller = ViewCompat.getWindowInsetsController(window.decorView)
-             controller?.hide(WindowInsetsCompat.Type.systemBars())
-             controller?.systemBarsBehavior =
-                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            val controller = ViewCompat.getWindowInsetsController(window.decorView)
+            controller?.hide(WindowInsetsCompat.Type.systemBars())
+            controller?.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
-         }
+        }
     }
 
     private fun init() {
         setContent {
-            val systemUiController = rememberSystemUiController()
-            val color=MaterialTheme.colors.background
-            SideEffect {
-                systemUiController.setNavigationBarColor(color = color, darkIcons = true)
-            }
-            Column(Modifier.fillMaxSize()) {
-                Spacer(
-                    modifier = Modifier
-                        .windowInsetsTopHeight(WindowInsets.statusBars)
-                )
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth(), contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = rememberAsyncImagePainter(R.drawable.autojs_logo1),
-                        contentDescription = null,
-                        modifier = Modifier.size(120.dp),
-                    )
+            AutoXJsTheme {
+                Surface(color = MaterialTheme.colorScheme.surface) {
+                    val systemUiController = rememberSystemUiController()
+                    val color = MaterialTheme.colorScheme.background
+                    SideEffect {
+                        systemUiController.setNavigationBarColor(color = color, darkIcons = true)
+                    }
+                    Column(Modifier.fillMaxSize()) {
+                        Spacer(
+                            modifier = Modifier
+                                .windowInsetsTopHeight(WindowInsets.statusBars)
+                        )
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth(), contentAlignment = Alignment.Center
+                        ) {
+                            Image(
+                                painter = rememberAsyncImagePainter(R.drawable.autojs_logo1),
+                                contentDescription = null,
+                                modifier = Modifier.size(120.dp),
+                            )
+                        }
+                        Text(
+                            text = stringResource(id = R.string.powered_by_autojs),
+                            color = Color(0xdd000000),
+                            fontSize = 14.sp,
+                            modifier = Modifier
+                                .padding(12.dp)
+                                .align(Alignment.CenterHorizontally)
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .windowInsetsBottomHeight(WindowInsets.navigationBars)
+                        )
+                    }
                 }
-                Text(
-                    text = stringResource(id = R.string.powered_by_autojs),
-                    color = Color(0xdd000000),
-                    fontSize = 14.sp,
-                    modifier = Modifier
-                        .padding(12.dp)
-                        .align(Alignment.CenterHorizontally)
-                )
-                Spacer(
-                    modifier = Modifier
-                        .windowInsetsBottomHeight(WindowInsets.navigationBars)
-                )
             }
-
         }
     }
 

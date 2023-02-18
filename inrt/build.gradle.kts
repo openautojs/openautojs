@@ -4,7 +4,7 @@ import kotlin.collections.*
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-android-extensions")
+//    id("kotlin-android-extensions")
 }
 
 val propFile: File = File("E:/资料/jks/autojs-inrt/sign.properties");
@@ -54,6 +54,9 @@ android {
                 keyPassword = properties.getProperty("keyPassword")
             }
         }
+    }
+    viewBinding {
+        isEnabled = true
     }
     buildTypes {
         named("debug") {
@@ -192,21 +195,21 @@ fun copyTemplateToAPP(isDebug: Boolean) {
 }
 
 dependencies {
-    implementation("androidx.activity:activity-ktx:1.5.0")
-    implementation("androidx.appcompat:appcompat:1.4.2")
-    implementation("com.google.android.material:material:1.6.1")
-    implementation("androidx.annotation:annotation:1.4.0")
+    implementation("androidx.activity:activity-ktx:1.6.1")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.8.0")
+    implementation("androidx.annotation:annotation:1.5.0")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1-alpha01") {
         exclude(group = "com.android.support", "support-annotations")
     }
     implementation("com.github.bumptech.glide:glide:4.2.0") {
         exclude(group = "com.android.support")
     }
-    implementation("com.google.android.material:material:1.6.1")
+    implementation("com.google.android.material:material:1.8.0")
     // RxJava
     implementation("io.reactivex.rxjava2:rxjava:2.2.21")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")

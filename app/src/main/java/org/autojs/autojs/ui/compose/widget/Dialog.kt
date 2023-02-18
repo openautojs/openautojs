@@ -2,7 +2,7 @@ package org.autojs.autojs.ui.compose.widget
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,13 +22,16 @@ fun AskSaveDialog(
     onDismissClick: () -> Unit
 ) {
     if (isShowDialog) {
-        AlertDialog(
+        Dialog(
+
             onDismissRequest = onDismissRequest,
-            title = { Text(text = stringResource(id = R.string.text_alert)) },
-            text = {
-                Text(text = stringResource(id = R.string.edit_exit_without_save_warn))
-            },
-            buttons = {
+            properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
+        ) {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(8.dp)
+            ) {
                 Row(modifier = Modifier.fillMaxWidth()) {
                     TextButton(onClick = onDismissClick) {
                         Text(text = stringResource(id = R.string.text_exit_directly))
@@ -42,7 +45,7 @@ fun AskSaveDialog(
                     }
                 }
             }
-        )
+        }
     }
 }
 
@@ -60,7 +63,7 @@ fun ProgressDialog(
         ) {
             Surface(
                 modifier = Modifier.fillMaxWidth(),
-                color = MaterialTheme.colors.surface,
+                color = MaterialTheme.colorScheme.surfaceVariant,
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Row(
@@ -85,8 +88,8 @@ fun MyAlertDialog(
     modifier: Modifier = Modifier,
     title: @Composable (() -> Unit)? = null,
     text: @Composable (() -> Unit)? = null,
-    shape: Shape = MaterialTheme.shapes.medium,
-    backgroundColor: Color = MaterialTheme.colors.surface,
+    shape: Shape = MaterialTheme.shapes.large,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     contentColor: Color = contentColorFor(backgroundColor),
     properties: DialogProperties = DialogProperties()
 ) {
@@ -106,8 +109,8 @@ fun MyAlertDialog(
         title = title,
         text = text,
         shape = shape,
-        backgroundColor = backgroundColor,
-        contentColor = contentColor,
+//        backgroundColor = backgroundColor,
+//        contentColor = contentColor,
         properties = properties
     )
 }
@@ -119,8 +122,8 @@ fun MyAlertDialog1(
     modifier: Modifier = Modifier,
     title: @Composable (() -> Unit)? = null,
     text: @Composable (() -> Unit)? = null,
-    shape: Shape = MaterialTheme.shapes.medium,
-    backgroundColor: Color = MaterialTheme.colors.surface,
+    shape: Shape = MaterialTheme.shapes.extraLarge,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     contentColor: Color = contentColorFor(backgroundColor),
     properties: DialogProperties = DialogProperties()
 ) {
@@ -155,8 +158,8 @@ fun MyAlertDialog(
     title: @Composable (() -> Unit)? = null,
     text: @Composable (() -> Unit)? = null,
     buttons: @Composable (() -> Unit)? = null,
-    shape: Shape = MaterialTheme.shapes.medium,
-    backgroundColor: Color = MaterialTheme.colors.surface,
+    shape: Shape = MaterialTheme.shapes.large,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     contentColor: Color = contentColorFor(backgroundColor),
     properties: DialogProperties = DialogProperties()
 ) {
@@ -180,8 +183,8 @@ fun MyAlertDialog(
 fun MyDialog(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-    shape: Shape = MaterialTheme.shapes.small,
-    backgroundColor: Color = MaterialTheme.colors.surface,
+    shape: Shape = MaterialTheme.shapes.large,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     contentColor: Color = contentColorFor(backgroundColor),
     properties: DialogProperties = DialogProperties(),
     content: @Composable ColumnScope.() -> Unit
@@ -196,7 +199,7 @@ fun MyDialog(
             Column(
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(24.dp)
             ) {
                 content()
             }

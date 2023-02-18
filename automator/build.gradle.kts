@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("kotlin-android-extensions")
+//    id("kotlin-android-extensions")
 }
 
 android {
@@ -36,6 +36,6 @@ dependencies {
         exclude(group = "com.android.support",module = "support-annotations")
     }
     testImplementation("junit:junit:4.13.2")
-    api("androidx.appcompat:appcompat:1.4.2")
+    api("androidx.appcompat:appcompat:1.6.1")
     api(project(":common"))
 }

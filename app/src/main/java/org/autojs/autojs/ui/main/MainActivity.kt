@@ -1,22 +1,37 @@
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
+
 package org.autojs.autojs.ui.main
 
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.material.*
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material.ModalDrawer
+import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -40,6 +55,7 @@ import org.autojs.autojs.ui.build.ProjectConfigActivity
 import org.autojs.autojs.ui.build.ProjectConfigActivity_
 import org.autojs.autojs.ui.common.ScriptOperations
 import org.autojs.autojs.ui.compose.theme.AutoXJsTheme
+import org.autojs.autojs.ui.compose.theme.isLight
 import org.autojs.autojs.ui.compose.widget.MyIcon
 import org.autojs.autojs.ui.compose.widget.SearchBox2
 import org.autojs.autojs.ui.explorer.ExplorerViewKt
@@ -68,11 +84,8 @@ class MainActivity : FragmentActivity() {
     private val viewPager: ViewPager2 by lazy { ViewPager2(this) }
     private var scope: CoroutineScope? = null
 
-    @OptIn(ExperimentalPermissionsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
         if (Pref.isForegroundServiceEnabled()) ForegroundService.start(this)
         else ForegroundService.stop(this)
 
@@ -83,7 +96,7 @@ class MainActivity : FragmentActivity() {
         setContent {
             scope = rememberCoroutineScope()
             AutoXJsTheme {
-                Surface(color = MaterialTheme.colors.background) {
+                Surface(color = MaterialTheme.colorScheme.background) {
                     val permission = rememberExternalStoragePermissionsState {
                         if (it) {
                             scriptListFragment.explorerView.onRefresh()
@@ -92,6 +105,7 @@ class MainActivity : FragmentActivity() {
                     LaunchedEffect(key1 = Unit, block = {
                         permission.launchMultiplePermissionRequest()
                     })
+                    Text(text = "test")
                     MainPage(
                         activity = this,
                         scriptListFragment = scriptListFragment,
@@ -102,6 +116,7 @@ class MainActivity : FragmentActivity() {
                         },
                         viewPager = viewPager
                     )
+
                 }
             }
         }
@@ -146,9 +161,11 @@ fun MainPage(
     onDrawerState: (DrawerState) -> Unit,
     viewPager: ViewPager2
 ) {
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+
     val context = LocalContext.current
-    val scaffoldState = rememberScaffoldState()
-    onDrawerState(scaffoldState.drawerState)
+//    val scaffoldState = rememberScaffoldState()
+    onDrawerState(drawerState)
     val scope = rememberCoroutineScope()
 
     val bottomBarItems = remember {
@@ -158,69 +175,102 @@ fun MainPage(
         mutableStateOf(0)
     }
 
-    SetSystemUI(scaffoldState)
+//    SetSystemUI(drawerState)
 
-    Scaffold(
+    var width by remember() {
+        mutableStateOf(0.dp)
+    }
+    val localDensity = LocalDensity.current
+
+    ModalNavigationDrawer(
         modifier = Modifier
-            .fillMaxSize(),
-        scaffoldState = scaffoldState,
-        drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
-        topBar = {
-            Surface(elevation = 4.dp, color = MaterialTheme.colors.primarySurface) {
-                Column() {
-                    Spacer(
-                        modifier = Modifier
-                            .windowInsetsTopHeight(WindowInsets.statusBars)
-                    )
-                    TopBar(
-                        currentPage = currentPage,
-                        requestOpenDrawer = {
-                            scope.launch { scaffoldState.drawerState.open() }
-                        },
-                        onSearch = { keyword ->
-                            scriptListFragment.explorerView.setFilter { it.name.contains(keyword) }
-                        },
-                        scriptListFragment = scriptListFragment,
-                        webViewFragment = webViewFragment
-                    )
-                }
-            }
-        },
-        bottomBar = {
-            Surface(elevation = 4.dp, color = MaterialTheme.colors.surface) {
-                Column {
-                    BottomBar(bottomBarItems, currentPage, onSelectedChange = { currentPage = it })
-                    Spacer(
-                        modifier = Modifier
-                            .windowInsetsBottomHeight(WindowInsets.navigationBars)
-                    )
-                }
-            }
-        },
-        drawerContent = {
-            DrawerPage()
-        },
-
-        ) {
-        AndroidView(
-            modifier = Modifier.padding(it),
-            factory = {
-                viewPager.apply {
-                    fillMaxSize()
-                    adapter = ViewPager2Adapter(
-                        activity,
-                        scriptListFragment,
-                        taskManagerFragment,
-                        webViewFragment
-                    )
-                    isUserInputEnabled = false
-                    ViewCompat.setNestedScrollingEnabled(this, true)
+            .fillMaxSize()
+            .onSizeChanged {
+                width = with(localDensity) {
+                    it.width.toDp()
                 }
             },
-            update = { viewPager0 ->
-                viewPager0.currentItem = currentPage
+        gesturesEnabled = drawerState.isOpen,
+        drawerState = drawerState,
+        drawerContent = {
+            Surface(color = MaterialTheme.colorScheme.surface) {
+                DrawerPage(modifier = Modifier.width(width = width - 50.dp).padding(16.dp))
             }
-        )
+        }) {
+        Scaffold(
+            modifier = Modifier
+                .fillMaxSize(),
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(text = stringResource(id = R.string.app_name))
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            scope.launch { drawerState.open() }
+                        }) {
+                            Icon(
+                                Icons.Default.Menu,
+                                contentDescription = stringResource(id = R.string.text_menu)
+                            )
+                        }
+                    }
+                )
+//            Surface(shadowElevation = 4.dp, color = MaterialTheme.colorScheme.surface) {
+//                Column() {
+//                    Spacer(
+//                        modifier = Modifier
+//                            .windowInsetsTopHeight(WindowInsets.statusBars)
+//                    )
+//                    TopBar(
+//                        currentPage = currentPage,
+//                        requestOpenDrawer = {
+//                            scope.launch { drawerState.open() }
+//                        },
+//                        onSearch = { keyword ->
+//                            scriptListFragment.explorerView.setFilter { it.name.contains(keyword) }
+//                        },
+//                        scriptListFragment = scriptListFragment,
+//                        webViewFragment = webViewFragment
+//                    )
+//                }
+//            }
+            },
+            bottomBar = {
+                BottomBar(bottomBarItems, currentPage, onSelectedChange = { currentPage = it })
+//            Surface(tonalElevation = 4.dp, color = MaterialTheme.colorScheme.surface) {
+//                Column {
+//                    BottomBar(bottomBarItems, currentPage, onSelectedChange = { currentPage = it })
+////                    Spacer(
+////                        modifier = Modifier
+////                            .windowInsetsBottomHeight(WindowInsets.navigationBars)
+////                    )
+//                }
+//            }
+            },
+        ) {
+            AndroidView(
+                modifier = Modifier.padding(it),
+                factory = {
+                    viewPager.apply {
+                        fillMaxSize()
+                        adapter = ViewPager2Adapter(
+                            activity,
+                            scriptListFragment,
+                            taskManagerFragment,
+                            webViewFragment
+                        )
+                        isUserInputEnabled = false
+                        ViewCompat.setNestedScrollingEnabled(this, true)
+                    }
+                },
+                update = { viewPager0 ->
+                    viewPager0.currentItem = currentPage
+                }
+            )
+
+        }
+
     }
 }
 
@@ -245,22 +295,22 @@ fun rememberExternalStoragePermissionsState(onPermissionsResult: (allAllow: Bool
         })
 
 @Composable
-private fun SetSystemUI(scaffoldState: ScaffoldState) {
+private fun SetSystemUI(drawerState: DrawerState) {
     val systemUiController = rememberSystemUiController()
-    val useDarkIcons =
-        if (MaterialTheme.colors.isLight) {
-            scaffoldState.drawerState.isOpen || scaffoldState.drawerState.isAnimationRunning
-        } else false
-
-    val navigationUseDarkIcons = MaterialTheme.colors.isLight
+//    val useDarkIcons =
+//        if (MaterialTheme.colorScheme.isLight) {
+//            drawerState.isOpen || drawerState.isAnimationRunning
+//        } else false
+    val useDarkIcons = !MaterialTheme.colorScheme.isLight
+    val navigationUseDarkIcons = !MaterialTheme.colorScheme.isLight
     SideEffect {
         systemUiController.setStatusBarColor(
             color = Color.Transparent,
-            darkIcons = useDarkIcons
+            darkIcons = true
         )
         systemUiController.setNavigationBarColor(
             Color.Transparent,
-            darkIcons = navigationUseDarkIcons
+            darkIcons = true
         )
     }
 }
@@ -286,26 +336,28 @@ fun BottomBar(
     currentSelected: Int,
     onSelectedChange: (Int) -> Unit
 ) {
-    BottomNavigation(elevation = 0.dp, backgroundColor = MaterialTheme.colors.background) {
+    NavigationBar {
         items.forEachIndexed { index, item ->
             val selected = currentSelected == index
-            val color = if (selected) MaterialTheme.colors.primary else Color.Gray
-            BottomNavigationItem(
+
+            NavigationBarItem(
                 selected = selected,
                 onClick = {
                     if (!selected) {
                         onSelectedChange(index)
                     }
                 },
+                label = {
+                    Text(
+                        text = item.label,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                },
                 icon = {
                     Icon(
                         painter = painterResource(id = item.icon),
                         contentDescription = item.label,
-                        tint = color
                     )
-                },
-                label = {
-                    Text(text = item.label, color = color)
                 }
             )
         }
@@ -324,101 +376,102 @@ private fun TopBar(
         mutableStateOf(false)
     }
     val context = LocalContext.current
-    TopAppBar(elevation = 0.dp) {
-        CompositionLocalProvider(
-            LocalContentAlpha provides ContentAlpha.high,
-        ) {
-            if (!isSearch) {
-                IconButton(onClick = requestOpenDrawer) {
-                    Icon(
-                        imageVector = Icons.Default.Menu,
-                        contentDescription = stringResource(id = R.string.text_menu),
-                    )
-                }
-
-                ProvideTextStyle(value = MaterialTheme.typography.h6) {
-                    Text(
-                        modifier = Modifier.weight(1f),
-                        text = stringResource(id = R.string.app_name)
-                    )
-                }
-
-                IconButton(onClick = { isSearch = true }) {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = stringResource(id = R.string.text_search)
-                    )
-                }
-            } else {
-                IconButton(onClick = { isSearch = false }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = stringResource(id = R.string.text_exit_search)
-                    )
-                }
-
-                var keyword by remember {
-                    mutableStateOf("")
-                }
-                SearchBox2(
-                    value = keyword,
-                    onValueChange = { keyword = it },
-                    modifier = Modifier.weight(1f),
-                    placeholder = { Text(text = stringResource(id = R.string.text_search)) },
-                    keyboardActions = KeyboardActions(onSearch = {
-                        onSearch(keyword)
-                    })
-                )
-            }
-            IconButton(onClick = { LogActivityKt.start(context) }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_logcat),
-                    contentDescription = stringResource(id = R.string.text_logcat)
-                )
-            }
-            when (currentPage) {
-                0 -> {
-                    var expanded by remember {
-                        mutableStateOf(false)
-                    }
-                    Box() {
-                        IconButton(onClick = { expanded = true }) {
-                            Icon(
-                                imageVector = Icons.Default.Add,
-                                contentDescription = stringResource(id = R.string.desc_more)
-                            )
-                        }
-                        TopAppBarMenu(
-                            expanded = expanded,
-                            onDismissRequest = { expanded = false },
-                            scriptListFragment = scriptListFragment
-                        )
-                    }
-                }
-                1 -> {
-                    IconButton(onClick = { AutoJs.getInstance().scriptEngineService.stopAll() }) {
-                        Icon(
-                            imageVector = Icons.Default.Clear,
-                            contentDescription = stringResource(id = R.string.desc_more)
-                        )
-                    }
-                }
-                2 -> {
-                    IconButton(onClick = {
-                        webViewFragment.swipeRefreshWebView.webView.url?.let {
-                            IntentUtil.browse(context, it)
-                        }
-                    }) {
-                        Icon(
-                            painterResource(id = R.drawable.ic_external_link),
-                            contentDescription = stringResource(id = R.string.text_browser_open)
-                        )
-                    }
-                }
-            }
-
-        }
-    }
+    TopAppBar(title = { Text(stringResource(id = R.string.app_name)) })
+//    TopAppBar() {
+//        CompositionLocalProvider(
+//            LocalContentAlpha provides ContentAlpha.high,
+//        ) {
+//            if (!isSearch) {
+//                IconButton(onClick = requestOpenDrawer) {
+//                    Icon(
+//                        imageVector = Icons.Default.Menu,
+//                        contentDescription = stringResource(id = R.string.text_menu),
+//                    )
+//                }
+//
+//                ProvideTextStyle(value = MaterialTheme.typography.h6) {
+//                    Text(
+//                        modifier = Modifier.weight(1f),
+//                        text = stringResource(id = R.string.app_name)
+//                    )
+//                }
+//
+//                IconButton(onClick = { isSearch = true }) {
+//                    Icon(
+//                        imageVector = Icons.Default.Search,
+//                        contentDescription = stringResource(id = R.string.text_search)
+//                    )
+//                }
+//            } else {
+//                IconButton(onClick = { isSearch = false }) {
+//                    Icon(
+//                        imageVector = Icons.Default.ArrowBack,
+//                        contentDescription = stringResource(id = R.string.text_exit_search)
+//                    )
+//                }
+//
+//                var keyword by remember {
+//                    mutableStateOf("")
+//                }
+//                SearchBox2(
+//                    value = keyword,
+//                    onValueChange = { keyword = it },
+//                    modifier = Modifier.weight(1f),
+//                    placeholder = { Text(text = stringResource(id = R.string.text_search)) },
+//                    keyboardActions = KeyboardActions(onSearch = {
+//                        onSearch(keyword)
+//                    })
+//                )
+//            }
+//            IconButton(onClick = { LogActivityKt.start(context) }) {
+//                Icon(
+//                    painter = painterResource(id = R.drawable.ic_logcat),
+//                    contentDescription = stringResource(id = R.string.text_logcat)
+//                )
+//            }
+//            when (currentPage) {
+//                0 -> {
+//                    var expanded by remember {
+//                        mutableStateOf(false)
+//                    }
+//                    Box() {
+//                        IconButton(onClick = { expanded = true }) {
+//                            Icon(
+//                                imageVector = Icons.Default.Add,
+//                                contentDescription = stringResource(id = R.string.desc_more)
+//                            )
+//                        }
+//                        TopAppBarMenu(
+//                            expanded = expanded,
+//                            onDismissRequest = { expanded = false },
+//                            scriptListFragment = scriptListFragment
+//                        )
+//                    }
+//                }
+//                1 -> {
+//                    IconButton(onClick = { AutoJs.getInstance().scriptEngineService.stopAll() }) {
+//                        Icon(
+//                            imageVector = Icons.Default.Clear,
+//                            contentDescription = stringResource(id = R.string.desc_more)
+//                        )
+//                    }
+//                }
+//                2 -> {
+//                    IconButton(onClick = {
+//                        webViewFragment.swipeRefreshWebView.webView.url?.let {
+//                            IntentUtil.browse(context, it)
+//                        }
+//                    }) {
+//                        Icon(
+//                            painterResource(id = R.drawable.ic_external_link),
+//                            contentDescription = stringResource(id = R.string.text_browser_open)
+//                        )
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
 }
 
 @Composable
@@ -459,7 +512,7 @@ private fun NewDirectory(
         ).newDirectory()
         else showExternalStoragePermissionToast(context)
     }
-    DropdownMenuItem(onClick = {
+    androidx.compose.material.DropdownMenuItem(onClick = {
         onDismissRequest()
         permission.launchMultiplePermissionRequest()
     }) {
@@ -486,7 +539,7 @@ private fun NewFile(
         ).newFile()
         else showExternalStoragePermissionToast(context)
     }
-    DropdownMenuItem(onClick = {
+    androidx.compose.material.DropdownMenuItem(onClick = {
         onDismissRequest()
         permission.launchMultiplePermissionRequest()
     }) {
@@ -513,7 +566,7 @@ private fun ImportFile(
         ).importFile()
         else showExternalStoragePermissionToast(context)
     }
-    DropdownMenuItem(onClick = {
+    androidx.compose.material.DropdownMenuItem(onClick = {
         onDismissRequest()
         permission.launchMultiplePermissionRequest()
     }) {
@@ -532,7 +585,7 @@ private fun NewProject(
     scriptListFragment: ScriptListFragment,
     onDismissRequest: () -> Unit
 ) {
-    DropdownMenuItem(onClick = {
+    androidx.compose.material.DropdownMenuItem(onClick = {
         onDismissRequest()
         ProjectConfigActivity_.intent(context)
             .extra(

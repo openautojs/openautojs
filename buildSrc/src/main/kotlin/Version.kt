@@ -5,7 +5,8 @@ import java.io.File
 lateinit var versions: Versions
     private set
 
-val compose_version = "1.2.0-rc01"
+val compose_version = "1.3.1"
+val kotlin_version = "1.7.10"
 
 fun initVersions(file: File) {
     val json = file.readText()

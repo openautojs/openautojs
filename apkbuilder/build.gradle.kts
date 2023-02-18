@@ -28,13 +28,12 @@ android {
 }
 
 dependencies {
+
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("androidx.core:core-ktx:1.8.0")
-}
-dependencies {
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude("junit", "junit")
-    }
+    implementation("androidx.core:core-ktx:1.9.0")
+//    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+//        exclude("junit", "junit")
+//    }
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1-alpha01") {
         exclude(group = "com.android.support", module = "support-annotations")
     }
@@ -42,7 +41,6 @@ dependencies {
     api(fileTree("libs") { include("*.jar") })
     api(files("libs/tiny-sign-0.9.jar"))
     api(files("libs/commons-io-2.5.jar"))
-    implementation("androidx.core:core-ktx:1.8.0")
 }
 repositories {
     mavenCentral()

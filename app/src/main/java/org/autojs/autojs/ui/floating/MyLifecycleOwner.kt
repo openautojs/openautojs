@@ -9,7 +9,8 @@ import androidx.savedstate.SavedStateRegistryOwner
 
 internal class MyLifecycleOwner : SavedStateRegistryOwner {
     private var mLifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
-    private var mSavedStateRegistryController: SavedStateRegistryController = SavedStateRegistryController.create(this)
+    private var mSavedStateRegistryController: SavedStateRegistryController =
+        SavedStateRegistryController.create(this)
 
     /**
      * @return True if the Lifecycle has been initialized.

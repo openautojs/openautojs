@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package org.autojs.autojs.ui.main.drawer
 
 import android.annotation.SuppressLint
@@ -7,26 +9,33 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.foundation.shape.ZeroCornerSize
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
@@ -57,26 +66,25 @@ import org.autojs.autojs.ui.build.MyTextField
 import org.autojs.autojs.ui.compose.theme.AutoXJsTheme
 import org.autojs.autojs.ui.compose.widget.MyAlertDialog1
 import org.autojs.autojs.ui.compose.widget.MyIcon
-import org.autojs.autojs.ui.compose.widget.MySwitch
 import org.autojs.autojs.ui.floating.FloatyWindowManger
 import org.autojs.autojs.ui.settings.SettingsActivity_
-import org.openautojs.autojs.R
 import org.joda.time.DateTimeZone
 import org.joda.time.Instant
+import org.openautojs.autojs.R
 
 private const val TAG = "DrawerPage"
-private const val URL_DEV_PLUGIN = "https://github.com/kkevsekk1/Auto.js-VSCode-Extension"
+private const val URL_DEV_PLUGIN = "https://github.com/openautojs/openautojs-vscode-extension"
 private const val PROJECT_ADDRESS = "https://github.com/openautojs/openautojs"
 private const val DOWNLOAD_ADDRESS = "https://github.com/openautojs/openautojs/releases"
 private const val FEEDBACK_ADDRESS = "https://github.com/openautojs/openautojs/issues"
 
 @Composable
-fun DrawerPage() {
+fun DrawerPage(modifier: Modifier) {
     val context = LocalContext.current
     rememberCoroutineScope()
     Column(
-        Modifier
-            .fillMaxSize()
+        modifier
+            .fillMaxHeight()
     ) {
         Spacer(
             modifier = Modifier
@@ -278,7 +286,7 @@ private fun BottomButtons() {
                     )
                 )
             },
-            colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colors.onBackground)
+            colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onBackground)
         ) {
             MyIcon(imageVector = Icons.Default.Settings, contentDescription = null)
             Spacer(modifier = Modifier.width(8.dp))
@@ -297,7 +305,7 @@ private fun BottomButtons() {
                     ).show()
                 } else exitCompletely(context)
             },
-            colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colors.onBackground)
+            colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onBackground)
         ) {
             MyIcon(imageVector = Icons.Default.ExitToApp, contentDescription = null)
             Spacer(modifier = Modifier.width(8.dp))
@@ -444,9 +452,15 @@ private fun ConnectComputerDialog(
         var host by remember {
             mutableStateOf(Pref.getServerAddressOrDefault(WifiTool.getRouterIp(context)))
         }
-        Surface(shape = RoundedCornerShape(4.dp)) {
-            Column(Modifier.padding(16.dp)) {
-                Text(text = stringResource(id = R.string.text_server_address))
+        Surface(
+            shape = MaterialTheme.shapes.extraLarge,
+            color = MaterialTheme.colorScheme.surfaceVariant
+        ) {
+            Column(Modifier.padding(24.dp)) {
+                Text(
+                    text = stringResource(id = R.string.text_server_address),
+                    style =  MaterialTheme.typography.titleLarge
+                )
                 MyTextField(
                     value = host,
                     onValueChange = { host = it },
@@ -860,7 +874,7 @@ fun SwitchItem(
         Box(modifier = Modifier.weight(1f)) {
             text()
         }
-        MySwitch(checked = checked, onCheckedChange = onCheckedChange)
+        Switch(checked = checked, onCheckedChange = onCheckedChange)
     }
 }
 
@@ -892,7 +906,12 @@ fun TimedTaskSchedulerDialog(
             Pref.setTaskManager(selected)
             toast(context, R.string.text_set_successfully)
         },
-        title = { Text(text = stringResource(id = R.string.text_switch_timed_task_scheduler)) },
+        title = {
+            Text(
+                text = stringResource(id = R.string.text_switch_timed_task_scheduler),
+                style = MaterialTheme.typography.titleLarge
+            )
+        },
         text = {
             Column {
                 Spacer(modifier = Modifier.size(16.dp))

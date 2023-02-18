@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package org.autojs.autojs.ui.floating.layoutinspector
 
 import android.annotation.SuppressLint
@@ -9,8 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,21 +19,22 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.AndroidUiDispatcher
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.compositionContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewTreeLifecycleOwner
-import androidx.lifecycle.ViewTreeViewModelStoreOwner
+import androidx.lifecycle.*
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.Theme
 import com.stardust.app.DialogUtils
 import com.stardust.enhancedfloaty.FloatyService
 import com.stardust.view.accessibility.NodeInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import org.openautojs.autojs.R
 import org.autojs.autojs.ui.codegeneration.CodeGenerateDialog
 import org.autojs.autojs.ui.compose.theme.AutoXJsTheme
@@ -73,15 +75,20 @@ open class LayoutHierarchyFloatyWindow(private val mRootNode: NodeInfo) : FullSc
                 Content()
             }
         }
-        // Trick The ComposeView into thinking we are tracking lifecycle
-        val viewModelStore = ViewModelStore()
         val lifecycleOwner = MyLifecycleOwner()
         lifecycleOwner.performRestore(null)
         lifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
         ViewTreeLifecycleOwner.set(view, lifecycleOwner)
-        ViewTreeViewModelStoreOwner.set(view) { viewModelStore }
         view.setViewTreeSavedStateRegistryOwner(lifecycleOwner)
-
+        val viewModelStore = ViewModelStore()
+        ViewTreeViewModelStoreOwner.set(view) { viewModelStore }
+        val coroutineContext = AndroidUiDispatcher.CurrentThread
+        val runRecomposeScope = CoroutineScope(coroutineContext)
+        val recomposer = Recomposer(coroutineContext)
+        view.compositionContext = recomposer
+        runRecomposeScope.launch {
+            recomposer.runRecomposeAndApplyChanges()
+        }
         return view
     }
 
@@ -142,7 +149,7 @@ open class LayoutHierarchyFloatyWindow(private val mRootNode: NodeInfo) : FullSc
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                     ) {
-                        Text(text = stringResource(R.string.text_hide_and_show))
+                        Text(text = stringResource(if (isShowLayoutHierarchyView)R.string.text_hide else R.string.text_show))
                     }
                 }
             }

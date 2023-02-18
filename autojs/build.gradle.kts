@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("kotlin-android-extensions")
+//    id("kotlin-android-extensions")
 }
 
 android {
@@ -46,7 +46,7 @@ dependencies {
     api("com.afollestad.material-dialogs:core:0.9.2.3"){
         exclude(group = "com.android.support")
     }
-    api("com.google.android.material:material:1.7.0-beta01")
+    api("com.google.android.material:material:1.9.0-alpha01")
     api("com.github.hyb1996:EnhancedFloaty:0.31")
     api("com.makeramen:roundedimageview:2.3.0")
     // OkHttp
@@ -56,7 +56,7 @@ dependencies {
     // RootShell
     api("com.github.Stericson:RootShell:1.6")
     // Gson
-    api("com.google.code.gson:gson:2.9.1")
+    api("com.google.code.gson:gson:2.10")
     // log4j
     api(group = "de.mindpipe.android", name = "android-logging-log4j", version = "1.0.3")
     api(group = "log4j", name = "log4j", version = "1.2.17")
@@ -71,10 +71,10 @@ dependencies {
     // libs
     api(fileTree("../app/libs"){include("dx.jar", "rhino-1.7.14-jdk7.jar")})
     api("cz.adaptech:tesseract4android:4.1.1")
-    api("com.google.mlkit:text-recognition:16.0.0-beta5")
-    api("com.google.mlkit:text-recognition-chinese:16.0.0-beta5")
-    api("com.google.mlkit:text-recognition-devanagari:16.0.0-beta5")
-    api("com.google.mlkit:text-recognition-japanese:16.0.0-beta5")
-    api("com.google.mlkit:text-recognition-korean:16.0.0-beta5")
+    api("com.google.mlkit:text-recognition:16.0.0-beta6")
+    api("com.google.mlkit:text-recognition-chinese:16.0.0-beta6")
+    api("com.google.mlkit:text-recognition-devanagari:16.0.0-beta6")
+    api("com.google.mlkit:text-recognition-japanese:16.0.0-beta6")
+    api("com.google.mlkit:text-recognition-korean:16.0.0-beta6")
 }
 
