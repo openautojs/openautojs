@@ -11,12 +11,12 @@ import org.openautojs.autojs.inrt.R
 
 class ScriptExecutionGlobalListener : ScriptExecutionListener {
 
-    override fun onStart(execution: ScriptExecution) {
-        execution.engine.setTag(ENGINE_TAG_START_TIME, System.currentTimeMillis())
+    override fun onStart(execution: ScriptExecution?) {
+        execution?.engine?.setTag(ENGINE_TAG_START_TIME, System.currentTimeMillis())
     }
 
-    override fun onSuccess(execution: ScriptExecution, result: Any?) {
-        onFinish(execution)
+    override fun onSuccess(execution: ScriptExecution?, result: Any?) {
+        execution?.let { onFinish(it) }
     }
 
     private fun onFinish(execution: ScriptExecution) {
@@ -26,8 +26,8 @@ class ScriptExecutionGlobalListener : ScriptExecutionListener {
                 .verbose(GlobalAppContext.getString(R.string.text_execution_finished), execution.source.toString(), seconds)
     }
 
-    override fun onException(execution: ScriptExecution, e: Throwable) {
-        onFinish(execution)
+    override fun onException(execution: ScriptExecution?, e: Throwable?) {
+        execution?.let { onFinish(it) }
     }
 
     companion object {
