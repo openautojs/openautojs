@@ -78,10 +78,10 @@ fun AutoXJsTheme(
             val context = view.context
             if (context is Activity){
                 val window = context.window
-                WindowCompat.setDecorFitsSystemWindows(window, false)
-                window.statusBarColor = Color.Transparent.toArgb()
-                window.navigationBarColor = Color.Transparent.toArgb()
-//                ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
+//                WindowCompat.setDecorFitsSystemWindows(window, false)
+//                window.statusBarColor = Color.Transparent.toArgb()
+//                window.navigationBarColor = Color.Transparent.toArgb()
+////                ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
                 WindowCompat.getInsetsController(context.window, context.window.decorView).apply {
                     isAppearanceLightStatusBars = !darkTheme
                     isAppearanceLightNavigationBars = !darkTheme

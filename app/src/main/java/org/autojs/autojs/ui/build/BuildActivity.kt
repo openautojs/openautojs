@@ -66,7 +66,7 @@ open class BuildActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SetSystemUI()
+//                    SetSystemUI()
                     BuildPage(viewModel)
                 }
             }

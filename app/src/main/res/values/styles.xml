@@ -12,8 +12,8 @@
         <item name="android:divider">@color/divider</item>
         <item name="drawer_item_text_color">@color/drawer_menu_item_text_color</item>
         <item name="drawer_group_text_color">@color/drawer_menu_group_text_color</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
     </style>
 
     <style name="ToolBarStyle" parent="ThemeOverlay.AppCompat.ActionBar">

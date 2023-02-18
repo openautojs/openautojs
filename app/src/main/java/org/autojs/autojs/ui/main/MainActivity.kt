@@ -86,6 +86,12 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.statusBarColor = Color.Transparent.toArgb()
+        window.navigationBarColor = Color.Transparent.toArgb()
+//                ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
+
         if (Pref.isForegroundServiceEnabled()) ForegroundService.start(this)
         else ForegroundService.stop(this)
 
