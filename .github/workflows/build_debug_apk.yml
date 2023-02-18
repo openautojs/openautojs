@@ -9,7 +9,7 @@ on:
     paths-ignore:
       - "README_zh-CN.md"
       - "README.md"
-      -
+
 jobs:
   build:
     runs-on: ubuntu-latest
