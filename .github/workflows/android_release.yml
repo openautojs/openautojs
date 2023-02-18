@@ -28,11 +28,11 @@ jobs:
           ls
 
       - name: Key base64 to file
-          uses: timheuer/base64-to-file@v1.2
-          with:
-            fileName: 'android_key.jks'
-            fileDir: '/tmp/.android_key/'
-            encodedString: ${{ secrets.ANDROID_KEY_BASE64 }}
+        uses: timheuer/base64-to-file@v1.2
+        with:
+          fileName: 'android_key.jks'
+          fileDir: '/tmp/.android_key/'
+          encodedString: ${{ secrets.ANDROID_KEY_BASE64 }}
 
       - name: Build App
         run: |
