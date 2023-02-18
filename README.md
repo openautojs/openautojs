@@ -38,7 +38,7 @@ This project is based on Autox.js to establish the openautojs community, this pr
 Based on Git Annotations, code before 2020.7.24 is protected by the original license, code added in 2020.7.24 ~ 2023.2.17 is protected by GPLv2, and code added after 2023.2.17 is protected by GPLv3
 
 This product is licensed under the [GPL-V3](https://opensource.org/license/gpl-3-0/) license,
-And [autojs项目](https://github.com/hyb1996/Auto.js) license:
+And [autojs Project](https://github.com/hyb1996/Auto.js) license:
 
 Based on [Mozilla Public License Version 2.0](https://github.com/hyb1996/NoRootScriptDroid/blob/master/LICENSE.md) with the following terms:
 Non-Commercial Use — The source code and binary products of this Project and the Projects derived from it may not be used for any commercial or for-profit purposes
