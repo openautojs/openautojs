@@ -1,6 +1,7 @@
 package org.autojs.autojs.devplugin.message
 
 import com.google.gson.annotations.SerializedName
+import com.stardust.util.compareVersions
 
 data class Message(
     @SerializedName("type")
@@ -21,9 +22,25 @@ data class HelloResponse(
     @SerializedName("version")
     val version: String? = "0"
 ) {
-    fun versionCode(): Long {
-        return version?.replace(".", "")?.toLongOrNull() ?: -1L
-    }
+    /**
+     * 比较两个版本号的大小。
+     *
+     * @param version1 第一个版本号
+     * @param version2 第二个版本号
+     * @return 如果第一个版本号小于第二个版本号，则返回负整数；
+     *         如果第一个版本号大于第二个版本号，则返回正整数；
+     *         如果两个版本号相等，则返回0。
+     *         Compares two version numbers.
+     *
+     * @param version1 the first version number
+     * @param version2 the second version number
+     * @return a negative integer if version1 is less than version2,
+     *         a positive integer if version1 is greater than version2,
+     *         or zero if they are equal.
+     */
+    fun compareVersions() =
+        version?.let { it1 -> compareVersions(it1, "1.109.0") } ?: -1
+
 }
 
 data class LogData(

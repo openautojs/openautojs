@@ -1,6 +1,7 @@
 package org.autojs.autojs.network.entity
 
 import com.google.gson.annotations.SerializedName
+import com.stardust.util.compareVersions
 import org.openautojs.autojs.BuildConfig
 
 class GithubReleaseInfoList : ArrayList<GithubReleaseInfo>()
@@ -48,15 +49,11 @@ data class GithubReleaseInfo(
 
 /**
  * Check latest version
- * @return Returns null if targetCommitish is prerelease or not "dev-test"
+ * @return Returns null if targetCommitish is prerelease or not "main"
  */
 fun GithubReleaseInfo.isLatestVersion(): Boolean? {
-    if (targetCommitish != "dev-test" || prerelease) return null
-    return this.name.getVersionByName() <= BuildConfig.VERSION_NAME.getVersionByName()
-}
-
-private fun String.getVersionByName(): Long {
-    return this.replace(".", "").toLongOrNull() ?: -1
+    if (targetCommitish != "main" || prerelease) return null
+    return compareVersions(this.tagName, BuildConfig.VERSION_NAME) <= 0
 }
 
 data class Asset(

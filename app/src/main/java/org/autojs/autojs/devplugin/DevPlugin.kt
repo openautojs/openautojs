@@ -7,11 +7,11 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import com.stardust.app.GlobalAppContext
-import io.ktor.server.plugins.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import okio.ByteString.Companion.toByteString
 import org.autojs.autojs.devplugin.message.Hello
 import org.autojs.autojs.devplugin.message.HelloResponse
@@ -21,7 +21,6 @@ import org.openautojs.autojs.BuildConfig
 import org.openautojs.autojs.R
 import java.io.File
 import java.net.SocketTimeoutException
-import java.util.*
 
 object DevPlugin {
 
@@ -185,7 +184,7 @@ object DevPlugin {
                 ok = { resp ->
                     coroutineScope {
                         launch { onSuccess() }
-                        if (resp.versionCode() >= 11090) {
+                        if (resp.compareVersions() >= 0) {
                             launch { ping() }
                         }
                     }
@@ -311,7 +310,7 @@ object DevPlugin {
                     kotlin.runCatching { gson.fromJson(msg, HelloResponse::class.java) }.getOrNull()
                 Log.d(TAG, "serveHello: " + data?.toString())
                 data?.let {
-                    val okData = if (it.versionCode() >= 11090) "ok" else "连接成功"
+                    val okData = if (it.compareVersions() >= 0) "ok" else "连接成功"
                     if (it.type == TYPE_HELLO && it.data == okData) {
                         ok(data)
                         return
