@@ -1,0 +1,59 @@
+name: Build Debug Apk
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - "README_zh-CN.md"
+      - "README.md"
+  pull_request:
+    paths-ignore:
+      - "README_zh-CN.md"
+      - "README.md"
+  create:
+    tags:
+      - '*'
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout
+        id: check
+        uses: actions/checkout@v1
+
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build inrt template
+        run: |
+          chmod 777 ./gradlew
+          ./gradlew inrt:assembleTemplate
+          ls
+
+      - name: Build App
+        run: |
+          ls  inrt/build/outputs/apk/template/release
+          mv  inrt/build/outputs/apk/template/release/*.apk  app/src/main/assets/template.apk
+          ls  app/src/main/assets
+          ./gradlew app:assembleCommonDebug
+
+      - name: Upload apk to artifact 1
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-common-arm64-v8a-debug.apk
+          path: app/build/outputs/apk/common/debug/app-common-arm64-v8a-debug.apk
+
+      - name: Upload apk to artifact 2
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-common-armeabi-v7a-debug.apk
+          path: app/build/outputs/apk/common/debug/app-common-armeabi-v7a-debug.apk
+
+      - name: Upload apk to artifact 3
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-common-universal-debug.apk
+          path: app/build/outputs/apk/common/debug/app-common-universal-debug.apk
