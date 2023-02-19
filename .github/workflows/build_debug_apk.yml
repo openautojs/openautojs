@@ -2,6 +2,8 @@ name: Build Debug Apk
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
     paths-ignore:
       - "README_zh-CN.md"
       - "README.md"
@@ -9,9 +11,6 @@ on:
     paths-ignore:
       - "README_zh-CN.md"
       - "README.md"
-  create:
-    tags:
-      - '*'
       
 jobs:
   build:
