@@ -50,8 +50,9 @@ jobs:
           filename="${file##*/}"
           filename="${filename%-unsigned.apk}.apk"
           echo "Signing ${filename}"
-          apksigner sign --v4-signing-enabled false --ks /tmp/.android_key/android_key.jks --ks-pass env:ANDROID_KS_PASS --ks-key-alias ${{ secrets.ANDROID_KEY_ALIAS }} ${file} -o app/build/outputs/apk/common/release/${filename}
+          apksigner sign --v4-signing-enabled false --ks /tmp/.android_key/android_key.jks --ks-pass env:ANDROID_KS_PASS --ks-key-alias ${{ secrets.ANDROID_KEY_ALIAS }} ${file} app/build/outputs/apk/common/release/${filename}
           done
+          rm app/build/outputs/apk/common/release/*-unsigned.apk
 
 
       - name: create-gh-release
