@@ -19,11 +19,13 @@ jobs:
       - name: set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 11
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'gradle'
+      - run: chmod 777 ./gradlew && ./gradlew build --no-daemon
 
       - name: Build inrt template
         run: |
-          chmod 777 ./gradlew
           ./gradlew inrt:assembleTemplate
           ls
 
