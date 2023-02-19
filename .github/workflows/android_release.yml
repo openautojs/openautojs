@@ -14,10 +14,10 @@ jobs:
 
       - name: checkout
         id: check
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 11
 
@@ -53,7 +53,6 @@ jobs:
           apksigner sign --v4-signing-enabled false --ks /tmp/.android_key/android_key.jks --ks-pass env:ANDROID_KS_PASS --ks-key-alias ${{ secrets.ANDROID_KEY_ALIAS }} --out app/build/outputs/apk/common/release/${filename} ${file}
           done
           rm app/build/outputs/apk/common/release/*-unsigned.apk
-
 
       - name: create-gh-release
         uses: taiki-e/create-gh-release-action@v1
