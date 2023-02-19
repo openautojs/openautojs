@@ -13,7 +13,7 @@ jobs:
       - name: set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'corretto'
           java-version: '11'
           cache: 'gradle'
       - run: chmod 777 ./gradlew && ./gradlew build --no-daemon
