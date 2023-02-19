@@ -55,12 +55,12 @@ jobs:
           rm app/build/outputs/apk/common/release/*-unsigned.apk
 
 
-      - name: create-gh-release
-        uses: taiki-e/create-gh-release-action@v1
-        with:
-          changelog: CHANGELOG.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+#      - name: create-gh-release
+#        uses: taiki-e/create-gh-release-action@v1
+#        with:
+#          changelog: CHANGELOG.md
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: release
         uses: softprops/action-gh-release@v1
