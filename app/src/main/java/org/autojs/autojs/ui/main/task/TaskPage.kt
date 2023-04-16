@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -45,6 +46,7 @@ fun TaskPage() {
             ElevatedCard(modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
                 onClick = { itemList[index] = item.copy(isExpanded = !item.isExpanded) }) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row {
@@ -81,7 +83,10 @@ fun TaskPage() {
                                             text = task.name,
                                             style = MaterialTheme.typography.titleMedium
                                         )
-                                        Text(text = task.desc ?: "", style = MaterialTheme.typography.bodySmall)
+                                        Text(
+                                            text = task.desc ?: "",
+                                            style = MaterialTheme.typography.bodySmall
+                                        )
                                     }
                                     IconButton(onClick = { task.cancel() }) {
                                         MyIcon(
