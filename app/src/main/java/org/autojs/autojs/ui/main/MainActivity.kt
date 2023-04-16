@@ -273,6 +273,7 @@ fun MainPage(
                             taskManagerFragment,
                             webViewFragment
                         )
+                        offscreenPageLimit = 3
                         isUserInputEnabled = false
                         ViewCompat.setNestedScrollingEnabled(this, true)
                     }
